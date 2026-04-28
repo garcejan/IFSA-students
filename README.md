@@ -2,6 +2,9 @@
 
 This repository contains hands-on tutorials for learning AI/ML development with IBM watsonx.ai platform. Each tutorial guides you through building practical AI systems from data preparation to deployment.
 
+![`Instructors`](/img/instructors.png)
+
+
 ## 📚 Tutorials
 
 ### 1. AutoAI: Train and Deploy ML Models
