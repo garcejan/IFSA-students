@@ -1,0 +1,13 @@
+# Trip/Diagnostics AAA demo — single container, runs on Podman or Docker.
+FROM registry.access.redhat.com/ubi9/nodejs-20-minimal:latest
+
+WORKDIR /opt/app-root/src
+COPY backend/package.json ./
+RUN npm install --omit=dev
+
+COPY backend/ ./
+COPY frontend/ ./public/
+
+ENV PORT=3000 NODE_ENV=production
+EXPOSE 3000
+CMD ["node", "server.js"]

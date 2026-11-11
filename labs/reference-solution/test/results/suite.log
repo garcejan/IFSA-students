@@ -1,0 +1,52 @@
+env=houselab
+
+=== Q1  Take the case of patient PPTH-003. What are we looking at?
+    status=completed  wall=12.891s
+    tools=['get_patient_record', 'chat_with_collaborator_dr_cameron']
+    delegated=['dr_cameron']  expected=None  -> MISROUTE
+=== Q2  Patient PPTH-001 had sudden aphasia and then a seizure, with a fever. 
+    status=completed  wall=10.6s
+    tools=['get_patient_record', 'chat_with_collaborator_dr_foreman_neurology', 'differential_diagnosis']
+    delegated=['dr_foreman_neurology']  expected=dr_foreman  -> PASS
+=== Q3  Patient PPTH-003 has drenching night sweats and has lost weight. Her L
+    status=completed  wall=16.984s
+    tools=['get_patient_record', 'chat_with_collaborator_dr_wilson_oncology', 'lab_reference']
+    delegated=['dr_wilson_oncology']  expected=dr_wilson  -> PASS
+=== Q4  Patient PPTH-004 is confused with an irregular heart rate of 148 and a
+    status=completed  wall=20.698s
+    tools=['get_patient_record', 'chat_with_collaborator_dr_chase', 'lab_reference']
+    delegated=['dr_chase']  expected=dr_chase  -> PASS
+=== Q5  Patient PPTH-004 is on warfarin. Cardiology wants to add amiodarone. I
+    status=completed  wall=6.641s
+    tools=['chat_with_collaborator_dr_cameron', 'check_drug_interaction']
+    delegated=['dr_cameron']  expected=dr_cameron  -> PASS
+=== Q6  Patient PPTH-003 is on tacrolimus. Can we add ceftriaxone?
+    status=completed  wall=10.163s
+    tools=['get_patient_record', 'chat_with_collaborator_dr_cameron', 'check_drug_interaction', 'list_formulary']
+    delegated=['dr_cameron']  expected=dr_cameron  -> PASS
+    tool failures=['check_drug_interaction']
+=== Q7  The family of patient PPTH-002 is refusing the lumbar puncture we need
+    status=completed  wall=6.17s
+    tools=['chat_with_collaborator_dr_cuddy_administration']
+    delegated=['dr_cuddy_administration']  expected=dr_cuddy  -> PASS
+=== Q8  Review this proposed answer against our protocol and score it: 'It is 
+    status=completed  wall=7.72s
+    tools=['chat_with_collaborator_case_reviewer', 'score_case_review']
+    delegated=['case_reviewer']  expected=case_reviewer  -> PASS
+
+=== Q1b (multi-turn on thread e6ce874c)  And what is the single test you would order first?
+    status=completed  wall=7.012s
+
+waiting 12s for traces to settle...
+  Q1: trace ec7d8591cf9d... obs=23 err=None
+  Q2: trace 2afc921e3dfa... obs=32 err=None
+  Q3: trace 79597fb9ef79... obs=32 err=None
+  Q4: trace 291eb9955752... obs=31 err=None
+  Q5: trace c75acdcf0f85... obs=23 err=None
+  Q6: trace b8dd9990b373... obs=41 err=None
+  Q7: trace e4f6b55adae2... obs=14 err=None
+  Q8: trace 97dc4cbcf78c... obs=23 err=None
+  Q1b: trace a80664bb5e7b... obs=14 err=None
+
+routing: 8/9 as expected
+wrote /Users/coredump/Desktop/Bob and WxO/house-md-lab/test/results/session.json

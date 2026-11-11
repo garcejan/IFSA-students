@@ -1,0 +1,19 @@
+{
+    "agent": "dr_house",
+    "goals": {
+        "summarize": []
+    },
+    "goal_details": [
+        {
+            "name": "summarize",
+            "type": "text",
+            "response": "Identifies the major CYP2C9 interaction and delegates to immunology",
+            "keywords": [
+                "CYP2C9",
+                "immunology"
+            ]
+        }
+    ],
+    "story": "Patient PPTH-004 is on warfarin, can we add amiodarone?",
+    "starting_sentence": "Can I add amiodarone to a patient who is already taking warfarin?"
+}

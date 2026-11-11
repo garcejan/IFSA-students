@@ -1,0 +1,73 @@
+{
+  "id": "9051a082-46f7-4aca-a095-e0032ecf5124",
+  "tenant_id": "<YOUR_ACCOUNT_ID>_<YOUR_INSTANCE_ID>",
+  "assistant_id": null,
+  "thread_id": "1f8be0e5-6729-4376-835d-72607e60dc2d",
+  "status": "completed",
+  "started_at": "2026-08-05T09:57:03.366240Z",
+  "completed_at": "2026-08-05T09:57:04.785631Z",
+  "failed_at": null,
+  "cancelled_at": null,
+  "llm_params": null,
+  "usage": null,
+  "last_error": null,
+  "result": {
+    "data": {
+      "message": {
+        "id": "75c22a9a-382f-466c-90f6-dd04cfff4a99",
+        "role": "assistant",
+        "_meta": null,
+        "log_id": null,
+        "content": [
+          {
+            "id": "1",
+            "text": "We have a classic consent dilemma here. The family is refusing a lumbar puncture that is medically indicated, and they\u2019re threatening legal action. This is squarely in Dr. Cuddy\u2019s domain\u2014issues of capacity, informed consent, refusal of treatment, and potential liability.\n\nI\u2019ll consult Dr. Cuddy for the appropriate steps.\n\n---\u00a0Sending message to Dr. Cuddy ---  \n\n**Message:**  \n\"The family of patient PPTH-002 is refusing a medically indicated lumbar puncture and is threatening to sue the hospital. What are our legal and ethical options for proceeding, including assessment of decision-making capacity, documentation, possible court involvement, and risk mitigation?\"  \n\n---\u00a0End of message ---  \n\nI\u2019ll await her guidance and then report back with the recommended course of action.  \n\nSynthetic teaching case - not medical advice.",
+            "response_type": "text"
+          }
+        ],
+        "context": {
+          "wxo_run_id": "9051a082-46f7-4aca-a095-e0032ecf5124",
+          "wxo_tenant_id": "<YOUR_ACCOUNT_ID>_<YOUR_INSTANCE_ID>",
+          "wxo_thread_id": "1f8be0e5-6729-4376-835d-72607e60dc2d",
+          "wxo_user_name": "Auto-generated service credentials"
+        },
+        "mentions": null,
+        "trace_id": "f274a5faf2fe37edcceb1a77c3b29efc",
+        "assistant": {
+          "is_default": true
+        },
+        "tenant_id": "<YOUR_ACCOUNT_ID>_<YOUR_INSTANCE_ID>",
+        "thread_id": "1f8be0e5-6729-4376-835d-72607e60dc2d",
+        "created_by": "iam-ServiceId-389c95d5-2fb9-405d-adbc-d19de8eec7b1",
+        "created_on": "2026-08-05T09:57:04.654759Z",
+        "session_id": "6857a675-3b7c-449d-8ea4-97f84c771992",
+        "updated_at": "2026-08-05T09:57:04.654759Z",
+        "document_ids": null,
+        "step_history": [],
+        "user_defined": null,
+        "message_state": null,
+        "parent_message_id": "82489d96-606c-42ae-b52f-bce9fc75f3bc",
+        "created_by_username": "Auto-generated service credentials",
+        "additional_properties": {
+          "is_interrupt": false,
+          "display_properties": {
+            "is_async": false,
+            "skip_render": false
+          }
+        }
+      },
+      "message_id": "75c22a9a-382f-466c-90f6-dd04cfff4a99",
+      "target_run_id": null,
+      "correlation_id": null,
+      "flowinstance_id": null
+    },
+    "type": "message_created"
+  },
+  "guardrails": null,
+  "agent_id": "8b8f148e-eadd-4fdb-945e-c14517bbbbd7",
+  "additional_parameters": null,
+  "trace_id": "f274a5faf2fe37edcceb1a77c3b29efc",
+  "_wall_seconds": 4.09,
+  "_started_at": 1785923821.48998,
+  "_polls": 3
+}

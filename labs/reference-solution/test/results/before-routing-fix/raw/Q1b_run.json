@@ -1,0 +1,73 @@
+{
+  "id": "23299a73-337d-4afb-b697-adf3bfef6e77",
+  "tenant_id": "<YOUR_ACCOUNT_ID>_<YOUR_INSTANCE_ID>",
+  "assistant_id": null,
+  "thread_id": "8dbf1747-a893-474b-a279-31a3bb2f91b9",
+  "status": "completed",
+  "started_at": "2026-08-05T09:57:13.158137Z",
+  "completed_at": "2026-08-05T09:57:14.378695Z",
+  "failed_at": null,
+  "cancelled_at": null,
+  "llm_params": null,
+  "usage": null,
+  "last_error": null,
+  "result": {
+    "data": {
+      "message": {
+        "id": "2ed2f7c9-28af-44dd-8004-6eb49e8d2487",
+        "role": "assistant",
+        "_meta": null,
+        "log_id": null,
+        "content": [
+          {
+            "id": "1",
+            "text": "**Red\u2011flag:** Possible septicemia in an immunosuppressed renal\u2011transplant patient \u2013 a life\u2011threatening infection that could progress to shock within the hour.\n\n**Stabilising measure:** Obtain two sets of **blood cultures** (aerobic\u202f+\u202fanaerobic) and start empiric broad\u2011spectrum IV antibiotics (e.g., vancomycin\u202f+\u202fcefepime) **after** the cultures are drawn.\n\n**Single test to order first:** **Blood cultures** \u2013 they are the quickest way to identify\u2014or rule out\u2014a bacterial (or fungal) bloodstream infection, which is the most immediate threat in this scenario.  \n\n*Synthetic teaching case - not medical advice.*",
+            "response_type": "text"
+          }
+        ],
+        "context": {
+          "wxo_run_id": "23299a73-337d-4afb-b697-adf3bfef6e77",
+          "wxo_tenant_id": "<YOUR_ACCOUNT_ID>_<YOUR_INSTANCE_ID>",
+          "wxo_thread_id": "8dbf1747-a893-474b-a279-31a3bb2f91b9",
+          "wxo_user_name": "Auto-generated service credentials"
+        },
+        "mentions": null,
+        "trace_id": "8a525ed698a42e1bb98b317775c31ddf",
+        "assistant": {
+          "is_default": true
+        },
+        "tenant_id": "<YOUR_ACCOUNT_ID>_<YOUR_INSTANCE_ID>",
+        "thread_id": "8dbf1747-a893-474b-a279-31a3bb2f91b9",
+        "created_by": "iam-ServiceId-389c95d5-2fb9-405d-adbc-d19de8eec7b1",
+        "created_on": "2026-08-05T09:57:14.266864Z",
+        "session_id": "f539d47c-40df-48c7-bfd9-d0e01d04d564",
+        "updated_at": "2026-08-05T09:57:14.266864Z",
+        "document_ids": null,
+        "step_history": [],
+        "user_defined": null,
+        "message_state": null,
+        "parent_message_id": "82208f3c-dc5f-4c81-8bbd-782adcb60e8c",
+        "created_by_username": "Auto-generated service credentials",
+        "additional_properties": {
+          "is_interrupt": false,
+          "display_properties": {
+            "is_async": false,
+            "skip_render": false
+          }
+        }
+      },
+      "message_id": "2ed2f7c9-28af-44dd-8004-6eb49e8d2487",
+      "target_run_id": null,
+      "correlation_id": null,
+      "flowinstance_id": null
+    },
+    "type": "message_created"
+  },
+  "guardrails": null,
+  "agent_id": "8b8f148e-eadd-4fdb-945e-c14517bbbbd7",
+  "additional_parameters": null,
+  "trace_id": "8a525ed698a42e1bb98b317775c31ddf",
+  "_wall_seconds": 3.166,
+  "_started_at": 1785923831.264123,
+  "_polls": 2
+}

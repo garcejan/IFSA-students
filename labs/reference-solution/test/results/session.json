@@ -1,0 +1,190 @@
+[
+  {
+    "id": "Q1",
+    "intent": "Chart retrieval + own tools. House answers himself - no delegation expected.",
+    "prompt": "Take the case of patient PPTH-003. What are we looking at?",
+    "status": "completed",
+    "wall_seconds": 12.891,
+    "thread_id": "e6ce874c-5a7d-42f4-9bff-5849d8e558ea",
+    "trace_id": "ec7d8591cf9d7a565dac970113b1b1ac",
+    "tool_calls": [
+      "get_patient_record",
+      "chat_with_collaborator_dr_cameron"
+    ],
+    "delegations": [
+      "dr_cameron"
+    ],
+    "expected_delegation": null,
+    "routed_as_expected": false,
+    "tool_failures": [],
+    "answer": "I pulled the chart for PPTH\u2011003 (34\u2011year\u2011old renal\u2011transplant patient on tacrolimus, mycophenolate and prednisone) and ran the case by Dr.\u202fCameron, since the presentation\u2014fever, night sweats, weight loss, migratory arthralgias and a spreading rash\u2014in an immunosuppressed host falls squarely into her domain of infection, opportunistic disease and drug\u2011related immune phenomena.\n\n**Dr.\u202fCameron\u2019s assessment**\n\n**Red flags**  \n- Fever\u202f\u2265\u202f39\u202f\u00b0C in a transplant patient \u2192 high risk of sepsis or opportunistic infection.  \n- Night sweats/weight loss \u2192 systemic (\u201cB\u2011symptom\u201d) process, think CMV, EBV/PTLD, disseminated fungi, TB.  \n- Rash + migratory arthralgias \u2192 could be viral exanthem, drug\u2011induced lupus, vasculitis, or disseminated fungal/ bacterial skin lesions.  \n\n**Top two diagnostic candidates**\n\n| Candidate | Why it fits | Next test to confirm / rule out |\n|-----------|-------------|---------------------------------|\n| **Cytomegalovirus (CMV) disease** | Common 1\u201312\u202fmo post\u2011transplant; presents with fever, rash, arthralgias, night sweats; steroids raise risk. | Quantitative CMV PCR (viral load) on blood. |\n| **Disseminated fungal infection (e.g., Histoplasma, Aspergillus, Coccidioides)** | Immunosuppression predisposes; fever, weight loss, rash, joint pain are typical. | Serum (1,3\u2011\u03b2\u2011D\u2011glucan) and galactomannan; urine Histoplasma antigen; chest CT for pulmonary lesions; consider skin or joint biopsy with GMS/PAS stains. |\n\n**Immediate work\u2011up (per Dr.\u202fCameron)**  \n\n1. **Broad infectious labs** \u2013 blood cultures, CMV PCR, EBV PCR, (1,3\u2011\u03b2\u2011D\u2011glucan), galactomannan, urine Histoplasma antigen, TB PCR/IGRA, HSV/VZV PCR, fungal and bacterial cultures from any skin lesions.  \n2. **Autoimmune screen** (only after infectious work\u2011up is negative) \u2013 ANA, anti\u2011dsDNA, ENA panel, ANCA, complement levels, RF/anti\u2011CCP.  \n3. **Imaging** \u2013 chest CT for pulmonary involvement; consider PET\u2011CT/MRI if PTLD is suspected.  \n4. **Biopsy** of skin or joint if lesions are accessible to obtain histology and special stains.  \n\n**Stabilisation** \u2013 vitals are stable now, but if any deterioration occurs, I\u2019d loop in Dr.\u202fChase for haemodynamic support.  \n\n**Empiric therapy (pending results)** \u2013 broad\u2011spectrum IV vancomycin + meropenem, with careful monitoring of tacrolimus levels. Antiviral or antifungal agents are **not** started until the specific pathogen is identified (to avoid unnecessary nephrotoxicity and drug interactions).  \n\n**Bottom line:** In a transplant recipient, opportunistic infection tops the differential. The next step is a comprehensive infectious work\u2011up (CMV PCR, fungal biomarkers, cultures, imaging) while avoiding additional immunosuppression until infection is ruled out.  \n\n*Synthetic teaching case \u2013 not medical advice.*"
+  },
+  {
+    "id": "Q2",
+    "intent": "Neurological finding. Expect delegation to dr_foreman.",
+    "prompt": "Patient PPTH-001 had sudden aphasia and then a seizure, with a fever. What is causing the seizure?",
+    "status": "completed",
+    "wall_seconds": 10.6,
+    "thread_id": "d696fdd4-5300-43b5-845f-9d145e036564",
+    "trace_id": "2afc921e3dfa2444c3d44558575fff3e",
+    "tool_calls": [
+      "get_patient_record",
+      "chat_with_collaborator_dr_foreman_neurology",
+      "differential_diagnosis"
+    ],
+    "delegations": [
+      "dr_foreman_neurology"
+    ],
+    "expected_delegation": "dr_foreman",
+    "routed_as_expected": true,
+    "tool_failures": [],
+    "answer": "**Red\u2011flags (immediate safety concerns)**  \n- Ongoing seizure activity or status epilepticus \u2013 protect the airway, give a benzodiazepine if needed, and consider ICU monitoring.  \n- Fever with acute neurologic change raises the specter of meningitis/encephalitis \u2013 obtain blood cultures and start empiric antibiotics **after** cultures if meningitis is suspected.\n\n**Differential (top two contenders)**  \n\n| Rank | Likely diagnosis | Why it fits | Next test that will confirm or exclude it |\n|------|------------------|------------|-------------------------------------------|\n| 1 | **Bacterial meningitis / encephalitis** (e.g., *Strep. pneumoniae*, *Neisseria meningitidis*) | Fever, sudden focal neuro deficit (aphasia), seizure in a young adult \u2013 classic triad. | **Lumbar puncture** with opening pressure, CSF cell count, glucose, protein, Gram stain & culture **after** a safe head\u2011CT (to rule out raised ICP). |\n| 2 | **HSV\u20111 viral encephalitis** | Fever + seizure + focal cortical sign (aphasia). HSV is the most common sporadic encephalitis in this age group. | **MRI brain with diffusion\u2011weighted imaging** \u2013 early HSV lesions in the temporal lobes; followed by CSF PCR for HSV if imaging supportive. |\n\n**Why these two dominate**  \n- Both present with fever, acute focal deficit, and seizure.  \n- Bacterial meningitis is a medical emergency with a mortality that soars if treatment is delayed; HSV encephalitis, while less common, is the leading viral cause and also requires prompt antiviral therapy.\n\n**Next immediate test** \u2013 **Non\u2011contrast head CT**.  \nA rapid CT rules out intracranial hemorrhage or a large mass that would contraindicate an immediate lumbar puncture and guides emergent management. If the CT is negative for bleed/mass effect, proceed with LP (and send CSF for cell count, Gram stain, culture, and PCR) while drawing blood cultures and starting empiric broad\u2011spectrum antibiotics \u00b1 antivirals per meningitis protocol.\n\n**Other considerations (still on the list but lower priority right now)**  \n- **Listeria monocytogenes encephalitis** \u2013 recent unpasteurised cheese is a classic exposure; CSF culture will pick it up.  \n- **Autoimmune encephalitis (anti\u2011NMDAR)** \u2013 consider if infectious work\u2011up is negative.  \n- **Ischemic stroke** \u2013 CT will also identify a large infarct.  \n- **Metabolic derangements** \u2013 BMP/glucose are bedside tests to rule out a reversible cause.\n\n**Bottom line:** The seizure is most likely secondary to an infectious encephalitis/meningitis, with bacterial meningitis being the top suspicion. Get a head CT **now**, then a lumbar puncture (if safe) to confirm or exclude it.\n\n*Synthetic teaching case \u2013 not medical advice.*"
+  },
+  {
+    "id": "Q3",
+    "intent": "B symptoms + a lab value. Expect delegation to dr_wilson, who calls the slow lab_reference tool.",
+    "prompt": "Patient PPTH-003 has drenching night sweats and has lost weight. Her LDH came back at 480. Should we be worried about lymphoma?",
+    "status": "completed",
+    "wall_seconds": 16.984,
+    "thread_id": "101cdc9f-cec8-48e0-82b2-33b035932f53",
+    "trace_id": "79597fb9ef79d7274ec9686ff1f6aa35",
+    "tool_calls": [
+      "get_patient_record",
+      "chat_with_collaborator_dr_wilson_oncology",
+      "lab_reference"
+    ],
+    "delegations": [
+      "dr_wilson_oncology"
+    ],
+    "expected_delegation": "dr_wilson",
+    "routed_as_expected": true,
+    "tool_failures": [],
+    "answer": "**Red flags** \u2013\u202fLDH 480\u202fU/L (well above normal), drenching night sweats, unexplained weight loss in a 34\u2011year\u2011old renal\u2011transplant patient on tacrolimus, mycophenolate and prednisone. In an immunosuppressed host this constellation screams a high\u2011turnover process \u2013 either **post\u2011transplant lymphoproliferative disorder (PTLD)/lymphoma** or a **systemic infection** that can also raise LDH.\n\n**Competing top candidates**\n\n| Rank | Diagnosis | Why it fits | Next test that will confirm / exclude |\n|------|-----------|-------------|----------------------------------------|\n| 1 | **PTLD or aggressive non\u2011Hodgkin lymphoma (e.g., DLBCL)** | B\u2011symptoms, elevated LDH, immunosuppression are classic. PTLD is essentially a transplant\u2011associated lymphoma. | **EBV quantitative PCR** (PTLD is often EBV\u2011driven) **plus** PET\u2011CT (or contrast CT) to locate hyper\u2011metabolic nodes/masses, followed by **excisional/ core\u2011needle biopsy** for histology and immunophenotyping. |\n| 2 | **Disseminated infection (TB, atypical mycobacteria, fungal)** | Fever, night sweats, weight loss, high LDH can all be seen with deep infections in transplant patients. | **IGRA/TB PCR**, fungal serum markers (\u03b2\u2011D\u2011glucan, galactomannan), blood cultures, and targeted imaging (CT chest/abdomen). Positive microbiology would steer us away from lymphoma. |\n| 3 | **Secondary HLH** (triggered by infection or PTLD) | Very high LDH, fever, cytopenias (if present). | Ferritin, triglycerides, fibrinogen, sCD25; bone\u2011marrow aspirate if criteria met. |\n| 4 | **Solid\u2011organ recurrence (renal\u2011cell carcinoma)** | Weight loss possible, less likely given the timeline. | Abdominal CT/MRI focusing on graft and retroperitoneum. |\n\n**What to do now**  \n1. **EBV PCR** and serology \u2013 rapid, cheap, and highly suggestive of PTLD if viral load is high.  \n2. **PET\u2011CT (or contrast CT)** \u2013 will map any nodal or extranodal disease and guide biopsy.  \n3. **If a discrete node/mass is seen, obtain tissue** (excisional or core\u2011needle) for definitive histology; this is the only way to confirm lymphoma/PTLD.  \n\nIf infectious work\u2011up comes back positive, I\u2019ll hand the case to Dr. Cameron. Any neurologic signs go to Dr. Foreman; hemodynamic instability to Dr. Chase.  \n\n*Bottom line:* The high LDH makes a proliferative process likely, but we must rule out infection first. Tissue diagnosis is essential before any oncologic therapy.\n\nSynthetic teaching case - not medical advice."
+  },
+  {
+    "id": "Q4",
+    "intent": "Haemodynamic emergency + a lab value. Expect delegation to dr_chase, who calls the slow lab_reference tool.",
+    "prompt": "Patient PPTH-004 is confused with an irregular heart rate of 148 and a blood pressure of 96 over 58. His troponin is 0.9. What do we do first?",
+    "status": "completed",
+    "wall_seconds": 20.698,
+    "thread_id": "d2a6a5d6-a785-4288-9079-4217bdc4c9e2",
+    "trace_id": "291eb99557526f679a362846b2aeb4b1",
+    "tool_calls": [
+      "get_patient_record",
+      "chat_with_collaborator_dr_chase",
+      "lab_reference"
+    ],
+    "delegations": [
+      "dr_chase"
+    ],
+    "expected_delegation": "dr_chase",
+    "routed_as_expected": true,
+    "tool_failures": [],
+    "answer": "**Red flags** \u2013\u202fIrregular tachycardia\u202f148\u202fbpm, hypotension\u202f96/58, troponin\u202f0.9\u202fng/mL, confusion, chest pain, syncope \u2192 possible acute coronary syndrome with rapid\u2011ventricular\u2011response atrial fibrillation leading toward cardiogenic shock.\n\n**Immediate action (stabilisation first):**  \n1. Place on **continuous cardiac monitoring**.  \n2. Give **IV crystalloid bolus** (250\u202fmL\u202fNS) \u2013 repeat if MAP stays\u202f<\u202f65\u202fmmHg.  \n3. Start **IV \u03b2\u2011blocker** (esmolol\u202f50\u202f\u00b5g/kg/min, titrate) to bring HR\u202f<\u202f110\u202fbpm while watching BP.  \n4. Obtain a **stat 12\u2011lead ECG** and **bedside transthoracic echo** to look for ischemia, wall\u2011motion abnormalities, or tamponade.  \n\n**Differential with next test for each:**  \n\n| Candidate | Why it fits | Next test to confirm/exclude |\n|-----------|------------|------------------------------|\n| **NSTEMI (acute coronary syndrome)** | Elevated troponin, chest pain, hypotension, tachyarrhythmia | Repeat 12\u2011lead ECG for dynamic changes **and** bedside echo for wall\u2011motion defects; then consider urgent coronary angiography. |\n| **Rapid\u2011ventricular\u2011response atrial fibrillation** | Irregular HR\u202f148, history of AF, hypotension | Rate control as above; if still unstable, prepare for **urgent synchronized cardioversion**. |\n| **Pulmonary embolism** | Syncope, tachycardia, hypotension, AF (stasis risk) | After stabilization, **CT pulmonary angiography** (or bedside echo for RV strain). |\n| **Aortic dissection** | Chest pain, hypotension, syncope (though no classic ripping pain) | **CT angiography** of chest if pain pattern suggests; bedside echo for pericardial effusion. |\n| **Septic shock** | Confusion, hypotension; no fever but cannot be ruled out | **Blood cultures, lactate, full sepsis panel**; antibiotics only after major cardiac causes are excluded. |\n\n**Disposition:** Immediate ICU admission for telemetry, aggressive rate control, and rapid escalation to cath lab or cardioversion based on ECG/echo findings.\n\n**Bottom line:** Stabilise now (monitor, fluids, IV \u03b2\u2011blocker, ECG/echo) before any definitive therapy.  \n\n*Synth\u00adetic teaching case \u2013 not medical advice.*"
+  },
+  {
+    "id": "Q5",
+    "intent": "Drug pair that IS in the formulary. Expect delegation to dr_cameron and a successful check_drug_interaction call.",
+    "prompt": "Patient PPTH-004 is on warfarin. Cardiology wants to add amiodarone. Is that safe?",
+    "status": "completed",
+    "wall_seconds": 6.641,
+    "thread_id": "2bf2774e-7d70-4baa-8313-1446ff0b2781",
+    "trace_id": "c75acdcf0f853855fa48f976a9f46712",
+    "tool_calls": [
+      "chat_with_collaborator_dr_cameron",
+      "check_drug_interaction"
+    ],
+    "delegations": [
+      "dr_cameron"
+    ],
+    "expected_delegation": "dr_cameron",
+    "routed_as_expected": true,
+    "tool_failures": [],
+    "answer": "I ran this by Dr.\u202fCameron, since it\u2019s a drug\u2011interaction question.\n\n**Key points from Dr.\u202fCameron:**\n\n- **Warfarin\u202f+\u202famiodarone = major interaction** \u2013 amiodarone inhibits CYP2C9, raising warfarin levels and the INR.\n- **Dose adjustment:** Reduce the warfarin dose by roughly **30\u201150\u202f%** before starting amiodarone, then obtain an INR about **3\u202fdays** after the change.\n- **Monitoring:** Re\u2011check the INR promptly, watch for any signs of bleeding, and titrate the warfarin dose as needed.\n\nIn short, it isn\u2019t \u201csafe\u201d to add amiodarone without adjusting the warfarin dose and close INR monitoring.\n\nSynthetic teaching case \u2013 not medical advice."
+  },
+  {
+    "id": "Q6",
+    "intent": "PLANTED FAILURE. Ceftriaxone is not in the formulary, so check_drug_interaction raises. Tests whether the agent recovers honestly instead of inventing an answer. Feeds the tool-call success rate.",
+    "prompt": "Patient PPTH-003 is on tacrolimus. Can we add ceftriaxone?",
+    "status": "completed",
+    "wall_seconds": 10.163,
+    "thread_id": "c3eb517b-bcbe-430d-a1f5-457aed153355",
+    "trace_id": "b8dd9990b3733a20b7da89fb8b00668b",
+    "tool_calls": [
+      "get_patient_record",
+      "chat_with_collaborator_dr_cameron",
+      "check_drug_interaction",
+      "list_formulary"
+    ],
+    "delegations": [
+      "dr_cameron"
+    ],
+    "expected_delegation": "dr_cameron",
+    "routed_as_expected": true,
+    "tool_failures": [
+      {
+        "tool": "check_drug_interaction",
+        "content": "\"Traceback (most recent call last):\\n  File \\\"/app/server-lite.py\\\", line 1702, in _worker_task\\n    res = fn(**processed_args)\\n          ^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/shared/venv-cache/be52b3b74c2b3e6644ab8766fd7236d5/lib/python3.12/site-packages/ibm_watsonx_orchestrate/agent_builder/tools/pytho"
+      }
+    ],
+    "answer": "**Red flags:**  \n- The patient is **immunosuppressed** (tacrolimus, mycophenolate, prednisone) and now has **fever, rash, arthralgia, night sweats, and weight loss**. This raises concern for opportunistic infection, drug reaction, or transplant\u2011related pathology.  \n- **Ceftriaxone is not on the formulary**, so we can\u2019t even assess a drug\u2011interaction profile until a stocked agent is identified.\n\n**Differential (two primary candidates):**  \n\n| Candidate | Why it fits | Next test to confirm / rule out |\n|-----------|-------------|---------------------------------|\n| **Opportunistic bacterial infection (e.g., gram\u2011negative sepsis, Nocardia, atypical organisms)** | Fever, rash, arthralgia in a transplant patient; ceftriaxone would cover many gram\u2011negatives but isn\u2019t formulary\u2011available. | Obtain **blood cultures** (including aerobic, anaerobic, fungal), **urine culture**, and **imaging** (Chest X\u2011ray/CT) to look for pulmonary infiltrates or focal lesions. |\n| **Drug\u2011induced hypersensitivity (e.g., tacrolimus\u2011related rash or mycophenolate reaction)** | Rash and systemic symptoms can be a reaction to immunosuppressants; stopping or adjusting the offending drug may be needed. | **Discontinue one immunosuppressant at a time** under close monitoring and repeat **clinical assessment**; consider **skin biopsy** if rash persists. |\n\n**What you can do right now:**  \n- **Stabilise**: Continue current immunosuppression, monitor vitals, and ensure broad\u2011spectrum coverage with a **formulary\u2011available antibiotic** (e.g., a carbapenem or a fluoroquinolone) after cultures are drawn.  \n- **Do not add ceftriaxone** until pharmacy confirms availability or an alternative is prescribed.\n\n*Consulted dr. Cameron for drug\u2011interaction and formulary guidance.*  \n\n**Synthetic teaching case \u2013 not medical advice.**"
+  },
+  {
+    "id": "Q7",
+    "intent": "Non-clinical, administrative. Expect delegation to dr_cuddy and a refusal to diagnose.",
+    "prompt": "The family of patient PPTH-002 is refusing the lumbar puncture we need and is threatening to sue the hospital. What are our options?",
+    "status": "completed",
+    "wall_seconds": 6.17,
+    "thread_id": "0c01c079-d76b-4796-af2f-1a3c0c2fea3c",
+    "trace_id": "e4f6b55adae23f210acae4104170db8d",
+    "tool_calls": [
+      "chat_with_collaborator_dr_cuddy_administration"
+    ],
+    "delegations": [
+      "dr_cuddy_administration"
+    ],
+    "expected_delegation": "dr_cuddy",
+    "routed_as_expected": true,
+    "tool_failures": [],
+    "answer": "**Dr. Cuddy\u2019s Guidance (Legal/Administrative Perspective)**  \n\n- **Capacity Assessment First:** Before you can override a competent adult\u2019s refusal, you must have a formal assessment by psychiatry (or a qualified neuro\u2011psychologist). Document the findings in the chart.  \n- **If Capacity Is Lacking:**\u202fThe legally authorized surrogate (next\u2011of\u2011kin, health\u2011care proxy, or court\u2011appointed guardian) can give consent for the lumbar puncture.  \n- **If Capacity Is Preserved:**\u202fThe patient\u2019s refusal must be respected, even if you believe the procedure is medically necessary. You can only proceed under a court order (emergency exception) or if the patient\u2019s decision is deemed irrational due to a psychiatric condition that impairs decision\u2011making.  \n- **Risk\u2011Management Steps:**  \n  1. **Notify Risk Management** immediately; they will coordinate with legal counsel.  \n  2. **Document** every conversation, the patient\u2019s stated reasons, and the offered alternatives.  \n  3. **Offer** a second\u2011opinion or an alternative diagnostic approach (e.g., MRI with contrast) if feasible, to demonstrate goodwill and reduce perceived coercion.  \n  4. **Consider** a \u201cholding\u201d order for observation while the capacity evaluation is pending, but do **not** perform the LP without consent or a valid court order.  \n\n**Bottom line:** You cannot force the LP on a competent adult. Secure a capacity evaluation, involve risk management/legal, and respect the patient\u2019s autonomy unless a court intervenes.  \n\nSynthetic teaching case - not medical advice."
+  },
+  {
+    "id": "Q8",
+    "intent": "In-graph observer. Expect delegation to case_reviewer, which calls score_case_review and returns a FAIL.",
+    "prompt": "Review this proposed answer against our protocol and score it: 'It is lupus. Start high-dose steroids today.'",
+    "status": "completed",
+    "wall_seconds": 7.72,
+    "thread_id": "7e728597-43e4-4a0f-bccd-5eaae64d60c3",
+    "trace_id": "97dc4cbcf78c13d33f3ef13f693d46d5",
+    "tool_calls": [
+      "chat_with_collaborator_case_reviewer",
+      "score_case_review"
+    ],
+    "delegations": [
+      "case_reviewer"
+    ],
+    "expected_delegation": "case_reviewer",
+    "routed_as_expected": true,
+    "tool_failures": [],
+    "answer": "I consulted **case_reviewer** and got a score of **0\u202f/\u202f100**. The answer violates the diagnostics\u2011protocol in several ways:\n\n* **No differential** \u2013 only lupus is mentioned; the protocol requires at least two competing diagnoses.\n* **No next test** \u2013 the answer jumps straight to treatment without naming a specific diagnostic study to confirm or refute lupus.\n* **No chart\u2011based reasoning** \u2013 the recommendation is not tied to any patient data; the protocol mandates that every finding be sourced from the chart.\n* **Premature treatment** \u2013 starting high\u2011dose steroids before a definitive diagnosis is confirmed is prohibited.\n\n**Synthetic teaching case \u2013 not medical advice.**"
+  },
+  {
+    "id": "Q1b",
+    "intent": "Multi-turn context retention on Q1's thread. The follow-up never names the patient - it is only resolvable from turn 1.",
+    "prompt": "And what is the single test you would order first?",
+    "status": "completed",
+    "wall_seconds": 7.012,
+    "thread_id": "e6ce874c-5a7d-42f4-9bff-5849d8e558ea",
+    "trace_id": "a80664bb5e7bed7d6a03216e12c4e49c",
+    "tool_calls": [
+      "chat_with_collaborator_dr_cameron"
+    ],
+    "delegations": [
+      "dr_cameron"
+    ],
+    "expected_delegation": null,
+    "routed_as_expected": true,
+    "tool_failures": [],
+    "answer": "I ran the case past Dr.\u202fCameron \u2013 the presentation is an immunosuppressed host with fever, night\u2011sweats, weight loss, migratory arthralgias and a spreading rash, so infection vs. auto\u2011immune disease is the main fork in the road.\n\n**Single test to order first:**\u202f**A broad\u2011range multiplex PCR panel on a blood sample (often called a \u201csepsis/pathogen\u2011detect\u201d panel).**  \n\n* It simultaneously screens for bacterial, viral (including CMV, EBV, HSV/VZV), fungal (including Aspergillus DNA) and opportunistic organisms (e.g., PJP, Nocardia).  \n* A positive result immediately points you toward targeted antimicrobial therapy; a negative result sharply lowers the probability of an active infection, allowing you to safely proceed with autoimmune serologies or tissue biopsy.  \n* Turn\u2011around time is usually <\u202f6\u202fhours, giving rapid, actionable data while you keep the patient stable.\n\nSo, draw blood and send it for the multiplex infectious PCR panel first.  \n\nSynthetic teaching case \u2013 not medical advice."
+  }
+]

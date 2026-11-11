@@ -1,0 +1,4 @@
+run_idx,orchestrate_agent_routing_accuracy,total_steps,llm_steps,average_agent_response_time,total_tool_calls,expected_tool_calls,correct_tool_calls,missed_tool_calls,relevant_tool_calls,tool_calls_with_incorrect_parameter,tool_call_recall,tool_call_precision,tool_match_success,tool_parameter_f1,keyword_match,semantic_match,text_match,is_success,dataset_name,text_match_comment
+1,1.0,4,2,2.285,1,0,,0,0,,,,True,,False,False,0,False,native_agent_evaluation_test_0,Matched 0/1 text goals
+1,0.0,10,5,2.222,2,0,,0,0,,,,True,,False,False,0,False,native_agent_evaluation_test_1,Matched 0/1 text goals
+1,1.0,4,2,2.224,1,0,,0,0,,,,True,,False,False,0,False,native_agent_evaluation_test_2,Matched 0/1 text goals

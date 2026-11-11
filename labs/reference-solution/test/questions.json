@@ -1,0 +1,81 @@
+[
+  {
+    "id": "Q1",
+    "intent": "Whole-chart framing question. Genuinely ambiguous: House may frame it himself, or route to dr_cameron because PPTH-003's dominant finding (febrile transplant recipient) is infectious. BOTH are correct - this is why routing evaluation needs an accepted SET, not a single expected value.",
+    "agent": "dr_house",
+    "prompt": "Take the case of patient PPTH-003. What are we looking at?",
+    "expect_tools": [
+      "get_patient_record"
+    ],
+    "expect_delegation": [
+      null,
+      "dr_cameron"
+    ]
+  },
+  {
+    "id": "Q2",
+    "intent": "Neurological finding. Expect delegation to dr_foreman.",
+    "agent": "dr_house",
+    "prompt": "Patient PPTH-001 had sudden aphasia and then a seizure, with a fever. What is causing the seizure?",
+    "expect_tools": [
+      "get_patient_record"
+    ],
+    "expect_delegation": "dr_foreman"
+  },
+  {
+    "id": "Q3",
+    "intent": "B symptoms + a lab value. Expect delegation to dr_wilson, who calls the slow lab_reference tool.",
+    "agent": "dr_house",
+    "prompt": "Patient PPTH-003 has drenching night sweats and has lost weight. Her LDH came back at 480. Should we be worried about lymphoma?",
+    "expect_tools": [
+      "get_patient_record"
+    ],
+    "expect_delegation": "dr_wilson"
+  },
+  {
+    "id": "Q4",
+    "intent": "Haemodynamic emergency + a lab value. Expect delegation to dr_chase, who calls the slow lab_reference tool.",
+    "agent": "dr_house",
+    "prompt": "Patient PPTH-004 is confused with an irregular heart rate of 148 and a blood pressure of 96 over 58. His troponin is 0.9. What do we do first?",
+    "expect_tools": [
+      "get_patient_record"
+    ],
+    "expect_delegation": "dr_chase"
+  },
+  {
+    "id": "Q5",
+    "intent": "Drug pair that IS in the formulary. Expect delegation to dr_cameron and a successful check_drug_interaction call.",
+    "agent": "dr_house",
+    "prompt": "Patient PPTH-004 is on warfarin. Cardiology wants to add amiodarone. Is that safe?",
+    "expect_tools": [
+      "get_patient_record"
+    ],
+    "expect_delegation": "dr_cameron"
+  },
+  {
+    "id": "Q6",
+    "intent": "PLANTED FAILURE. Ceftriaxone is not in the formulary, so check_drug_interaction raises. Tests whether the agent recovers honestly instead of inventing an answer. Feeds the tool-call success rate.",
+    "agent": "dr_house",
+    "prompt": "Patient PPTH-003 is on tacrolimus. Can we add ceftriaxone?",
+    "expect_tools": [
+      "get_patient_record"
+    ],
+    "expect_delegation": "dr_cameron"
+  },
+  {
+    "id": "Q7",
+    "intent": "Non-clinical, administrative. Expect delegation to dr_cuddy and a refusal to diagnose.",
+    "agent": "dr_house",
+    "prompt": "The family of patient PPTH-002 is refusing the lumbar puncture we need and is threatening to sue the hospital. What are our options?",
+    "expect_tools": [],
+    "expect_delegation": "dr_cuddy"
+  },
+  {
+    "id": "Q8",
+    "intent": "In-graph observer. Expect delegation to case_reviewer, which calls score_case_review and returns a FAIL.",
+    "agent": "dr_house",
+    "prompt": "Review this proposed answer against our protocol and score it: 'It is lupus. Start high-dose steroids today.'",
+    "expect_tools": [],
+    "expect_delegation": "case_reviewer"
+  }
+]

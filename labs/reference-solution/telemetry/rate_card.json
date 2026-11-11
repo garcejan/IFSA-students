@@ -1,0 +1,19 @@
+{
+  "_comment": [
+    "watsonx Orchestrate does NOT price your traffic for you. Live-verified: the",
+    "AgentOps v3 trace returns totalCost = 0 and calculatedTotalCost = 0 on a stock",
+    "SaaS instance, because no price sheet is attached to the model. Token COUNTS are",
+    "native and exact; the money is yours to supply.",
+    "",
+    "REPLACE the numbers below with your own contracted rate before quoting any figure",
+    "to a customer. They are placeholders chosen to make the arithmetic legible, not",
+    "a price list.",
+    "",
+    "Units: USD per 1,000,000 tokens."
+  ],
+  "currency": "USD",
+  "per_million_tokens": {
+    "openai/gpt-oss-120b": { "input": 0.15, "output": 0.60 },
+    "_default": { "input": 0.15, "output": 0.60 }
+  }
+}

@@ -1,0 +1,19 @@
+{
+    "agent": "dr_house",
+    "goals": {
+        "summarize": []
+    },
+    "goal_details": [
+        {
+            "name": "summarize",
+            "type": "text",
+            "response": "Names a differential including neurocysticercosis and delegates to the neurologist",
+            "keywords": [
+                "neurocysticercosis",
+                "neurologist"
+            ]
+        }
+    ],
+    "story": "Patient PPTH-001 had sudden aphasia then a seizure with fever. What is causing it?",
+    "starting_sentence": "What could be causing a patient's sudden aphasia, seizure, and fever?"
+}

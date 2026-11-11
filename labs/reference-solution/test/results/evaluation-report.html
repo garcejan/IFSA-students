@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dr House diagnostics team — evaluation report</title>
+<style>
+:root{
+  color-scheme:light;
+  --plane:#f9f9f7; --surface:#fcfcfb;
+  --ink:#0b0b0b; --ink2:#52514e; --muted:#898781;
+  --grid:#e1e0d9; --axis:#c3c2b7; --ring:rgba(11,11,11,.10);
+  --bar:#2a78d6; --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a;
+  --good:#0ca30c; --warn:#fab219; --serious:#ec835a; --crit:#d03b3b;
+  --good-ink:#006300;
+}
+@media (prefers-color-scheme:dark){
+  :root:where(:not([data-theme="light"])){
+    color-scheme:dark;
+    --plane:#0d0d0d; --surface:#1a1a19;
+    --ink:#fff; --ink2:#c3c2b7; --muted:#898781;
+    --grid:#2c2c2a; --axis:#383835; --ring:rgba(255,255,255,.10);
+    --bar:#3987e5; --s1:#3987e5; --s2:#d95926; --s3:#199e70;
+    --good-ink:#0ca30c;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --plane:#0d0d0d; --surface:#1a1a19;
+  --ink:#fff; --ink2:#c3c2b7; --muted:#898781;
+  --grid:#2c2c2a; --axis:#383835; --ring:rgba(255,255,255,.10);
+  --bar:#3987e5; --s1:#3987e5; --s2:#d95926; --s3:#199e70;
+  --good-ink:#0ca30c;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--plane);color:var(--ink);
+  font:15px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:1080px;margin:0 auto;padding:2.5rem 1.5rem 5rem}
+h1{font-size:1.75rem;margin:0 0 .35rem;letter-spacing:-.01em}
+h2{font-size:1.15rem;margin:2.75rem 0 .35rem;letter-spacing:-.005em}
+h3{font-size:.95rem;margin:1.5rem 0 .5rem;color:var(--ink2)}
+p{color:var(--ink2);margin:.35rem 0 1rem}
+.sub{color:var(--muted);font-size:.875rem;margin:0 0 2rem}
+.note{font-size:.85rem;color:var(--muted);margin:.4rem 0 1.25rem}
+.card{background:var(--surface);border:1px solid var(--ring);border-radius:12px;
+  padding:1.25rem 1.4rem;margin:0 0 1rem}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.75rem;margin:0 0 1rem}
+.tile{background:var(--surface);border:1px solid var(--ring);border-radius:12px;padding:.9rem 1rem}
+.tile .k{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.tile .v{font-size:1.7rem;line-height:1.15;margin-top:.3rem;font-variant-numeric:tabular-nums}
+.tile .u{font-size:.8rem;color:var(--muted);margin-top:.15rem}
+table{width:100%;border-collapse:collapse;font-size:.875rem}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+th{text-align:left;font-weight:600;color:var(--ink2);border-bottom:1px solid var(--axis);
+  padding:.5rem .6rem;white-space:nowrap}
+td{border-bottom:1px solid var(--grid);padding:.5rem .6rem;vertical-align:top}
+td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+code,.mono{font:.85em ui-monospace,SFMono-Regular,Menlo,monospace}
+.pill{display:inline-flex;align-items:center;gap:.35rem;font-size:.78rem;font-weight:600;
+  padding:.12rem .5rem;border-radius:999px;border:1px solid var(--ring);white-space:nowrap}
+.pill.ok{color:var(--good-ink)} .pill.bad{color:var(--crit)} .pill.warn{color:var(--serious)}
+.dot{width:.5rem;height:.5rem;border-radius:50%;flex:0 0 auto}
+.dot.ok{background:var(--good)} .dot.bad{background:var(--crit)} .dot.warn{background:var(--warn)}
+.bar-row{display:grid;grid-template-columns:3.2rem 1fr 4.5rem;align-items:center;gap:.6rem;margin:.3rem 0}
+.bar-track{height:14px;background:var(--grid);border-radius:4px;overflow:hidden;display:flex}
+.bar-fill{height:100%;background:var(--bar);border-radius:0 4px 4px 0}
+.seg{height:100%}
+.seg+.seg{box-shadow:-2px 0 0 var(--surface)}
+.lbl{color:var(--ink2);font-size:.82rem}
+.val{text-align:right;font-variant-numeric:tabular-nums;font-size:.82rem;color:var(--ink2)}
+.legend{display:flex;flex-wrap:wrap;gap:1rem;margin:.6rem 0 0;font-size:.8rem;color:var(--ink2)}
+.legend span{display:inline-flex;align-items:center;gap:.4rem}
+.sw{width:.65rem;height:.65rem;border-radius:2px;flex:0 0 auto}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:760px){.two{grid-template-columns:1fr}}
+details{border-top:1px solid var(--grid);padding:.6rem 0}
+summary{cursor:pointer;font-weight:600;font-size:.9rem}
+details pre{white-space:pre-wrap;font-size:.82rem;color:var(--ink2);
+  background:var(--plane);padding:.75rem;border-radius:8px;border:1px solid var(--ring)}
+.kicker{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+</style></head><body><div class="wrap">
+
+<p class="kicker">Bob-4-Watsonx-Orchestrate</p>
+<h1>Dr House diagnostics team — evaluation report</h1>
+<p class="sub">Orchestrator <code>dr_house</code> · 6 collaborators · generated 2026-08-05 13:48 ·
+session 0c01c079-d76b-4796-af2f-1a3c0c2fea3c</p>
+
+<div class="tiles"><div class="tile"><div class="k">Runs</div><div class="v">9</div><div class="u">questions executed</div></div><div class="tile"><div class="k">Error rate</div><div class="v">0.0%</div><div class="u">0 failed runs</div></div><div class="tile"><div class="k">Routing accuracy</div><div class="v">100.0%</div><div class="u">9 delegations</div></div><div class="tile"><div class="k">Tool-call success</div><div class="v">91.7%</div><div class="u">11/12 calls</div></div><div class="tile"><div class="k">p95 latency</div><div class="v">20.698s</div><div class="u">p50 10.163s · max 20.698s</div></div><div class="tile"><div class="k">Tokens</div><div class="v">151,161</div><div class="u">135,746 in · 15,415 out</div></div><div class="tile"><div class="k">Derived cost</div><div class="v">$0.0296</div><div class="u">native reported $0</div></div></div>
+
+<h2>1. Routing — did House call the right doctor?</h2>
+<p>Each delegation appears in the run's <code>step_history</code> as a
+<code>chat_with_collaborator_&lt;agent&gt;</code> step. wxO appends the collaborator's specialty,
+so <code>dr_wilson</code> arrives as <code>dr_wilson_oncology</code> — match by prefix, never equality.</p>
+<div class="card scroll"><table>
+<thead><tr><th>#</th><th>Question</th><th>Expected</th><th>Actual</th><th>Verdict</th><th>Note</th></tr></thead>
+<tbody><tr><td class='mono'>Q1</td><td>Take the case of patient PPTH-003. What are we looking at?</td><td class='mono'>self-answer | dr_cameron</td><td class='mono'>dr_cameron</td><td><span class="pill ok"><span class="dot ok"></span>PASS</span></td><td class='lbl'>delegated as expected</td></tr><tr><td class='mono'>Q2</td><td>Patient PPTH-001 had sudden aphasia and then a seizure, with a fever. What is …</td><td class='mono'>dr_foreman</td><td class='mono'>dr_foreman_neurology</td><td><span class="pill ok"><span class="dot ok"></span>PASS</span></td><td class='lbl'>delegated as expected</td></tr><tr><td class='mono'>Q3</td><td>Patient PPTH-003 has drenching night sweats and has lost weight. Her LDH came …</td><td class='mono'>dr_wilson</td><td class='mono'>dr_wilson_oncology</td><td><span class="pill ok"><span class="dot ok"></span>PASS</span></td><td class='lbl'>delegated as expected</td></tr><tr><td class='mono'>Q4</td><td>Patient PPTH-004 is confused with an irregular heart rate of 148 and a blood p…</td><td class='mono'>dr_chase</td><td class='mono'>dr_chase</td><td><span class="pill ok"><span class="dot ok"></span>PASS</span></td><td class='lbl'>delegated as expected</td></tr><tr><td class='mono'>Q5</td><td>Patient PPTH-004 is on warfarin. Cardiology wants to add amiodarone. Is that s…</td><td class='mono'>dr_cameron</td><td class='mono'>dr_cameron</td><td><span class="pill ok"><span class="dot ok"></span>PASS</span></td><td class='lbl'>delegated as expected</td></tr><tr><td class='mono'>Q6</td><td>Patient PPTH-003 is on tacrolimus. Can we add ceftriaxone?</td><td class='mono'>dr_cameron</td><td class='mono'>dr_cameron</td><td><span class="pill ok"><span class="dot ok"></span>PASS</span></td><td class='lbl'>delegated as expected</td></tr><tr><td class='mono'>Q7</td><td>The family of patient PPTH-002 is refusing the lumbar puncture we need and is …</td><td class='mono'>dr_cuddy</td><td class='mono'>dr_cuddy_administration</td><td><span class="pill ok"><span class="dot ok"></span>PASS</span></td><td class='lbl'>delegated as expected</td></tr><tr><td class='mono'>Q8</td><td>Review this proposed answer against our protocol and score it: &#x27;It is lupus. S…</td><td class='mono'>case_reviewer</td><td class='mono'>case_reviewer</td><td><span class="pill ok"><span class="dot ok"></span>PASS</span></td><td class='lbl'>delegated as expected</td></tr><tr><td class='mono'>Q1b</td><td>And what is the single test you would order first?</td><td class='mono'>self-answer | dr_cameron | dr_wilson | dr_foreman | dr_chase</td><td class='mono'>dr_cameron</td><td><span class="pill ok"><span class="dot ok"></span>PASS</span></td><td class='lbl'>delegated as expected</td></tr></tbody></table></div>
+
+<h2>2. Latency — and where it goes</h2>
+<div class="two">
+  <div class="card"><h3>Per question (client-observed)</h3><div class="bar-row"><div class="lbl">Q1</div><div class="bar-track"><div class="bar-fill" style="width:62.3%"></div></div><div class="val">12.891s</div></div><div class="bar-row"><div class="lbl">Q2</div><div class="bar-track"><div class="bar-fill" style="width:51.2%"></div></div><div class="val">10.6s</div></div><div class="bar-row"><div class="lbl">Q3</div><div class="bar-track"><div class="bar-fill" style="width:82.1%"></div></div><div class="val">16.984s</div></div><div class="bar-row"><div class="lbl">Q4</div><div class="bar-track"><div class="bar-fill" style="width:100.0%"></div></div><div class="val">20.698s</div></div><div class="bar-row"><div class="lbl">Q5</div><div class="bar-track"><div class="bar-fill" style="width:32.1%"></div></div><div class="val">6.641s</div></div><div class="bar-row"><div class="lbl">Q6</div><div class="bar-track"><div class="bar-fill" style="width:49.1%"></div></div><div class="val">10.163s</div></div><div class="bar-row"><div class="lbl">Q7</div><div class="bar-track"><div class="bar-fill" style="width:29.8%"></div></div><div class="val">6.17s</div></div><div class="bar-row"><div class="lbl">Q8</div><div class="bar-track"><div class="bar-fill" style="width:37.3%"></div></div><div class="val">7.72s</div></div><div class="bar-row"><div class="lbl">Q1b</div><div class="bar-track"><div class="bar-fill" style="width:33.9%"></div></div><div class="val">7.012s</div></div></div>
+  <div class="card"><h3>Percentiles</h3>
+    <table><tbody><tr><td>p50</td><td class='num'>10.163s</td></tr><tr><td>p90</td><td class='num'>20.698s</td></tr><tr><td>p95</td><td class='num'>20.698s</td></tr><tr><td>p99</td><td class='num'>20.698s</td></tr><tr><td>max</td><td class='num'>20.698s</td></tr><tr><td>mean</td><td class='num'>10.987s</td></tr></tbody></table>
+    <p class="note">n = 9. At this sample size p95 and p99 are the
+    slowest observation, not a stable estimate — quote them as such.</p>
+  </div>
+</div>
+
+<div class="card"><h3>Where each run spent its time</h3>
+<div class="bar-row"><div class="lbl">Q1</div><div class="bar-track" style="width:56.9%"><div class="seg" style="width:63.6%;background:var(--s1)"></div><div class="seg" style="width:3.2%;background:var(--s2)"></div><div class="seg" style="width:33.2%;background:var(--s3)"></div></div><div class="val">10.701s</div></div><div class="bar-row"><div class="lbl">Q2</div><div class="bar-track" style="width:45.6%"><div class="seg" style="width:49.1%;background:var(--s1)"></div><div class="seg" style="width:19.8%;background:var(--s2)"></div><div class="seg" style="width:31.2%;background:var(--s3)"></div></div><div class="val">8.565s</div></div><div class="bar-row"><div class="lbl">Q3</div><div class="bar-track" style="width:84.2%"><div class="seg" style="width:39.8%;background:var(--s1)"></div><div class="seg" style="width:67.0%;background:var(--s2)"></div></div><div class="val">15.817s</div></div><div class="bar-row"><div class="lbl">Q4</div><div class="bar-track" style="width:100.0%"><div class="seg" style="width:24.0%;background:var(--s1)"></div><div class="seg" style="width:93.4%;background:var(--s2)"></div></div><div class="val">18.792s</div></div><div class="bar-row"><div class="lbl">Q5</div><div class="bar-track" style="width:29.9%"><div class="seg" style="width:41.8%;background:var(--s1)"></div><div class="seg" style="width:5.8%;background:var(--s2)"></div><div class="seg" style="width:52.4%;background:var(--s3)"></div></div><div class="val">5.613s</div></div><div class="bar-row"><div class="lbl">Q6</div><div class="bar-track" style="width:50.7%"><div class="seg" style="width:42.9%;background:var(--s1)"></div><div class="seg" style="width:10.8%;background:var(--s2)"></div><div class="seg" style="width:46.3%;background:var(--s3)"></div></div><div class="val">9.525s</div></div><div class="bar-row"><div class="lbl">Q7</div><div class="bar-track" style="width:27.5%"><div class="seg" style="width:51.2%;background:var(--s1)"></div><div class="seg" style="width:48.8%;background:var(--s3)"></div></div><div class="val">5.165s</div></div><div class="bar-row"><div class="lbl">Q8</div><div class="bar-track" style="width:29.1%"><div class="seg" style="width:40.7%;background:var(--s1)"></div><div class="seg" style="width:7.5%;background:var(--s2)"></div><div class="seg" style="width:51.8%;background:var(--s3)"></div></div><div class="val">5.476s</div></div><div class="bar-row"><div class="lbl">Q1b</div><div class="bar-track" style="width:28.9%"><div class="seg" style="width:47.5%;background:var(--s1)"></div><div class="seg" style="width:52.5%;background:var(--s3)"></div></div><div class="val">5.438s</div></div>
+<div class="legend">
+  <span><span class="sw" style="background:var(--s1)"></span>LLM generation</span>
+  <span><span class="sw" style="background:var(--s2)"></span>Tool execution</span>
+  <span><span class="sw" style="background:var(--s3)"></span>Orchestration &amp; delegation</span>
+</div></div>
+
+<div class="card"><h3>Slowest spans in the session</h3>
+<div class="bar-row"><div class="lbl">LangGraph</div><div class="bar-track"><div class="bar-fill" style="width:100.0%"></div></div><div class="val">17.39s</div></div><div class="bar-row"><div class="lbl">collaborator</div><div class="bar-track"><div class="bar-fill" style="width:57.7%"></div></div><div class="val">10.04s</div></div><div class="bar-row"><div class="lbl">LangGraph[collaborator:90127661-76</div><div class="bar-track"><div class="bar-fill" style="width:56.4%"></div></div><div class="val">9.81s</div></div><div class="bar-row"><div class="lbl">LangGraph[collaborator:4eacc15b-af</div><div class="bar-track"><div class="bar-fill" style="width:40.2%"></div></div><div class="val">6.99s</div></div><div class="bar-row"><div class="lbl">tools</div><div class="bar-track"><div class="bar-fill" style="width:37.1%"></div></div><div class="val">6.45s</div></div><div class="bar-row"><div class="lbl">get_patient_record</div><div class="bar-track"><div class="bar-fill" style="width:36.6%"></div></div><div class="val">6.37s</div></div><div class="bar-row"><div class="lbl">POST /api/v1/runtime/tools/:toolId</div><div class="bar-track"><div class="bar-fill" style="width:35.7%"></div></div><div class="val">6.21s</div></div><div class="bar-row"><div class="lbl">runtime.invoke_tool</div><div class="bar-track"><div class="bar-fill" style="width:35.6%"></div></div><div class="val">6.19s</div></div><div class="bar-row"><div class="lbl">HTTP POST</div><div class="bar-track"><div class="bar-fill" style="width:35.6%"></div></div><div class="val">6.19s</div></div><div class="bar-row"><div class="lbl">POST /execute</div><div class="bar-track"><div class="bar-fill" style="width:35.5%"></div></div><div class="val">6.18s</div></div>
+<p class="note">Read this top-down when a run is slow. A tool span that dominates the trace is
+either a genuinely slow downstream system or a cold start — the trace tells you which,
+because a cold start shows a large outer span wrapping a small inner one.</p></div>
+
+<h2>3. Tool-call success</h2>
+<div class="card scroll"><table>
+<thead><tr><th>Tool</th><th>Calls</th><th>Failures</th><th>Success</th><th></th></tr></thead>
+<tbody><tr><td class='mono'>check_drug_interaction</td><td class='num'>2</td><td class='num'>1</td><td class='num'>50.0%</td><td><span class="pill bad"><span class="dot bad"></span>degraded</span></td></tr><tr><td class='mono'>differential_diagnosis</td><td class='num'>1</td><td class='num'>0</td><td class='num'>100.0%</td><td><span class="pill ok"><span class="dot ok"></span>100%</span></td></tr><tr><td class='mono'>get_patient_record</td><td class='num'>5</td><td class='num'>0</td><td class='num'>100.0%</td><td><span class="pill ok"><span class="dot ok"></span>100%</span></td></tr><tr><td class='mono'>lab_reference</td><td class='num'>2</td><td class='num'>0</td><td class='num'>100.0%</td><td><span class="pill ok"><span class="dot ok"></span>100%</span></td></tr><tr><td class='mono'>list_formulary</td><td class='num'>1</td><td class='num'>0</td><td class='num'>100.0%</td><td><span class="pill ok"><span class="dot ok"></span>100%</span></td></tr><tr><td class='mono'>score_case_review</td><td class='num'>1</td><td class='num'>0</td><td class='num'>100.0%</td><td><span class="pill ok"><span class="dot ok"></span>100%</span></td></tr></tbody></table></div>
+<p class="note">A failing tool is not automatically a failing agent: the question is whether the
+agent reported the failure honestly or invented an answer around it. Read the transcript, not
+only the rate.</p>
+
+<h2>4. Tokens and cost at session level</h2>
+<div class="card scroll"><table>
+<thead><tr><th>#</th><th>Tokens in</th><th>Tokens out</th><th>Total</th>
+<th>Derived cost</th><th>Native cost</th></tr></thead>
+<tbody><tr><td class='mono'>Q1</td><td class='num'>17,141</td><td class='num'>3,421</td><td class='num'>20,562</td><td class='num'>$0.00462</td><td class='num'>0</td></tr><tr><td class='mono'>Q2</td><td class='num'>15,943</td><td class='num'>2,305</td><td class='num'>18,248</td><td class='num'>$0.00377</td><td class='num'>0</td></tr><tr><td class='mono'>Q3</td><td class='num'>15,873</td><td class='num'>2,267</td><td class='num'>18,140</td><td class='num'>$0.00374</td><td class='num'>0</td></tr><tr><td class='mono'>Q4</td><td class='num'>20,511</td><td class='num'>2,321</td><td class='num'>22,832</td><td class='num'>$0.00447</td><td class='num'>0</td></tr><tr><td class='mono'>Q5</td><td class='num'>9,859</td><td class='num'>689</td><td class='num'>10,548</td><td class='num'>$0.00189</td><td class='num'>0</td></tr><tr><td class='mono'>Q6</td><td class='num'>16,625</td><td class='num'>1,651</td><td class='num'>18,276</td><td class='num'>$0.00348</td><td class='num'>0</td></tr><tr><td class='mono'>Q7</td><td class='num'>9,057</td><td class='num'>1,060</td><td class='num'>10,117</td><td class='num'>$0.00199</td><td class='num'>0</td></tr><tr><td class='mono'>Q8</td><td class='num'>10,276</td><td class='num'>653</td><td class='num'>10,929</td><td class='num'>$0.00193</td><td class='num'>0</td></tr><tr><td class='mono'>Q1b</td><td class='num'>20,461</td><td class='num'>1,048</td><td class='num'>21,509</td><td class='num'>$0.00370</td><td class='num'>0</td></tr></tbody></table></div>
+<p class="note">The native cost column is <code>trace.totalCost</code>. It is <strong>0</strong> for
+every run: token counts are captured for you, pricing is not. The derived column applies
+<code>telemetry/rate_card.json</code> — replace those rates with your contracted ones before
+quoting a number to anyone.</p>
+
+<h2>5. Control-plane telemetry: native vs derived</h2>
+
+<div class="card scroll"><table>
+<thead><tr><th>Signal</th><th>Where it lives</th><th>Native?</th><th>What you do about it</th></tr></thead>
+<tbody>
+<tr><td>End-to-end latency</td><td class="mono">trace.latency</td><td><span class="pill ok"><span class="dot ok"></span>native</span></td><td>Read it. Also present per-observation.</td></tr>
+<tr><td>Per-step latency</td><td class="mono">observation.latency</td><td><span class="pill ok"><span class="dot ok"></span>native</span></td><td>The only way to find which span is slow.</td></tr>
+<tr><td>Token counts</td><td class="mono">observation.usage.input / .output</td><td><span class="pill ok"><span class="dot ok"></span>native</span></td><td>Exact, per LLM call. Sum them yourself.</td></tr>
+<tr><td>Model identity</td><td class="mono">observation.model</td><td><span class="pill ok"><span class="dot ok"></span>native</span></td><td>Needed to price the tokens.</td></tr>
+<tr><td>Session / caller</td><td class="mono">trace.sessionId, trace.userId</td><td><span class="pill ok"><span class="dot ok"></span>native</span></td><td>The grouping key for session-level roll-ups.</td></tr>
+<tr><td>Quality scores</td><td class="mono">trace.scores[]</td><td><span class="pill ok"><span class="dot ok"></span>native</span></td><td>LLM-as-judge, attached async and sampled.</td></tr>
+<tr><td>Tokens in the runs API</td><td class="mono">run.usage</td><td><span class="pill bad"><span class="dot bad"></span>derive it</span></td><td>Returns <code>null</code>. Do not build on it — use the trace.</td></tr>
+<tr><td><strong>Cost</strong></td><td class="mono">trace.totalCost</td><td><span class="pill bad"><span class="dot bad"></span>derive it</span></td><td>Returns <code>0</code>: no price sheet is attached. Multiply tokens by your own rate card.</td></tr>
+<tr><td><strong>Error rate</strong></td><td>—</td><td><span class="pill bad"><span class="dot bad"></span>derive it</span></td><td>Derive: runs not <code>completed</code>, over total.</td></tr>
+<tr><td><strong>Tail latency</strong></td><td>—</td><td><span class="pill bad"><span class="dot bad"></span>derive it</span></td><td>Derive: percentiles over a window of traces.</td></tr>
+<tr><td><strong>Tool-call success</strong></td><td>—</td><td><span class="pill bad"><span class="dot bad"></span>derive it</span></td><td>Derive: inspect each <code>tool_response</code> for an error payload.</td></tr>
+<tr><td><strong>Dashboards</strong></td><td>—</td><td><span class="pill bad"><span class="dot bad"></span>derive it</span></td><td>There is no built-in ops dashboard. This report is the deliverable.</td></tr>
+</tbody></table></div>
+
+
+<h2>6. Control-plane evaluation (AgentOps)</h2>
+<p><code>orchestrate evaluations validate-native</code> scores the agent on its own metrics,
+including a native <strong>routing accuracy</strong> that is computed for you.</p>
+<div class="card scroll"><table><thead><tr><th>dataset name</th><th>orchestrate agent routing accuracy</th><th>total steps</th><th>llm steps</th><th>average agent response time</th><th>total tool calls</th><th>tool match success</th><th>keyword match</th><th>semantic match</th><th>is success</th></tr></thead><tbody><tr><td class='mono'>native_agent_evaluation_test_0</td><td class='num'>1.0</td><td class='num'>4</td><td class='num'>2</td><td class='num'>2.285</td><td class='num'>1</td><td class='num'>True</td><td class='num'>False</td><td class='num'>False</td><td class='num'>False</td></tr><tr><td class='mono'>native_agent_evaluation_test_1</td><td class='num'>0.0</td><td class='num'>10</td><td class='num'>5</td><td class='num'>2.222</td><td class='num'>2</td><td class='num'>True</td><td class='num'>False</td><td class='num'>False</td><td class='num'>False</td></tr><tr><td class='mono'>native_agent_evaluation_test_2</td><td class='num'>1.0</td><td class='num'>4</td><td class='num'>2</td><td class='num'>2.224</td><td class='num'>1</td><td class='num'>True</td><td class='num'>False</td><td class='num'>False</td><td class='num'>False</td></tr></tbody></table></div>
+<p class="note">Watch <code>keyword_match</code>: the expected-outcome column of your TSV is mined
+for keywords, and the run fails unless the answer contains them literally. A semantically perfect
+answer scores 0 if it phrases things differently. Write expectations in the agent's own vocabulary.</p>
+
+<h2>7. Quality scores attached by the control plane</h2>
+<p class="note">No judge scores attached to these traces yet. The control plane attaches them <strong>asynchronously and by sampling</strong> — re-fetch the traces a few minutes after the run, and do not assume every trace gets scored.</p>
+
+<h2>8. Per-question detail</h2>
+<div class="card"><details><summary>Q1 — Take the case of patient PPTH-003. What are we looking at?</summary><p class='note'>Whole-chart framing question. Genuinely ambiguous: House may frame it himself, or route to dr_cameron because PPTH-003&#x27;s dominant finding (febrile transplant recipient) is infectious. BOTH are correct - this is why routing evaluation needs an accepted SET, not a single expected value.</p><p class='note'><strong>trace</strong> <code>ec7d8591cf9d7a565dac970113b1b1ac</code> · <strong>thread</strong> <code>e6ce874c-5a7d-42f4-9bff-5849d8e558ea</code> · <strong>session</strong> <code>e6ce874c-5a7d-42f4-9bff-5849d8e558ea</code> · 23 observations</p><p class='note'><strong>tools</strong> <code>get_patient_record</code></p><pre>I pulled the chart for PPTH‑003 (34‑year‑old renal‑transplant patient on tacrolimus, mycophenolate and prednisone) and ran the case by Dr. Cameron, since the presentation—fever, night sweats, weight loss, migratory arthralgias and a spreading rash—in an immunosuppressed host falls squarely into her domain of infection, opportunistic disease and drug‑related immune phenomena.
+
+**Dr. Cameron’s assessment**
+
+**Red flags**  
+- Fever ≥ 39 °C in a transplant patient → high risk of sepsis or opportunistic infection.  
+- Night sweats/weight loss → systemic (“B‑symptom”) process, think CMV, EBV/PTLD, d</pre></details><details><summary>Q2 — Patient PPTH-001 had sudden aphasia and then a seizure, with a fever. What is ca</summary><p class='note'>Neurological finding. Expect delegation to dr_foreman.</p><p class='note'><strong>trace</strong> <code>2afc921e3dfa2444c3d44558575fff3e</code> · <strong>thread</strong> <code>d696fdd4-5300-43b5-845f-9d145e036564</code> · <strong>session</strong> <code>d696fdd4-5300-43b5-845f-9d145e036564</code> · 32 observations</p><p class='note'><strong>tools</strong> <code>get_patient_record, differential_diagnosis</code></p><pre>**Red‑flags (immediate safety concerns)**  
+- Ongoing seizure activity or status epilepticus – protect the airway, give a benzodiazepine if needed, and consider ICU monitoring.  
+- Fever with acute neurologic change raises the specter of meningitis/encephalitis – obtain blood cultures and start empiric antibiotics **after** cultures if meningitis is suspected.
+
+**Differential (top two contenders)**  
+
+| Rank | Likely diagnosis | Why it fits | Next test that will confirm or exclude it |
+|------|------------------|------------|-------------------------------------------|
+| 1 | **Bacterial mening</pre></details><details><summary>Q3 — Patient PPTH-003 has drenching night sweats and has lost weight. Her LDH came ba</summary><p class='note'>B symptoms + a lab value. Expect delegation to dr_wilson, who calls the slow lab_reference tool.</p><p class='note'><strong>trace</strong> <code>79597fb9ef79d7274ec9686ff1f6aa35</code> · <strong>thread</strong> <code>101cdc9f-cec8-48e0-82b2-33b035932f53</code> · <strong>session</strong> <code>101cdc9f-cec8-48e0-82b2-33b035932f53</code> · 32 observations</p><p class='note'><strong>tools</strong> <code>get_patient_record, lab_reference</code></p><pre>**Red flags** – LDH 480 U/L (well above normal), drenching night sweats, unexplained weight loss in a 34‑year‑old renal‑transplant patient on tacrolimus, mycophenolate and prednisone. In an immunosuppressed host this constellation screams a high‑turnover process – either **post‑transplant lymphoproliferative disorder (PTLD)/lymphoma** or a **systemic infection** that can also raise LDH.
+
+**Competing top candidates**
+
+| Rank | Diagnosis | Why it fits | Next test that will confirm / exclude |
+|------|-----------|-------------|----------------------------------------|
+| 1 | **PTLD or aggressive n</pre></details><details><summary>Q4 — Patient PPTH-004 is confused with an irregular heart rate of 148 and a blood pre</summary><p class='note'>Haemodynamic emergency + a lab value. Expect delegation to dr_chase, who calls the slow lab_reference tool.</p><p class='note'><strong>trace</strong> <code>291eb99557526f679a362846b2aeb4b1</code> · <strong>thread</strong> <code>d2a6a5d6-a785-4288-9079-4217bdc4c9e2</code> · <strong>session</strong> <code>d2a6a5d6-a785-4288-9079-4217bdc4c9e2</code> · 31 observations</p><p class='note'><strong>tools</strong> <code>get_patient_record, lab_reference</code></p><pre>**Red flags** – Irregular tachycardia 148 bpm, hypotension 96/58, troponin 0.9 ng/mL, confusion, chest pain, syncope → possible acute coronary syndrome with rapid‑ventricular‑response atrial fibrillation leading toward cardiogenic shock.
+
+**Immediate action (stabilisation first):**  
+1. Place on **continuous cardiac monitoring**.  
+2. Give **IV crystalloid bolus** (250 mL NS) – repeat if MAP stays &lt; 65 mmHg.  
+3. Start **IV β‑blocker** (esmolol 50 µg/kg/min, titrate) to bring HR &lt; 110 bpm while watching BP.  
+4. Obtain a **stat 12‑lead ECG** and **bedside transthoracic echo** to look for ische</pre></details><details><summary>Q5 — Patient PPTH-004 is on warfarin. Cardiology wants to add amiodarone. Is that saf</summary><p class='note'>Drug pair that IS in the formulary. Expect delegation to dr_cameron and a successful check_drug_interaction call.</p><p class='note'><strong>trace</strong> <code>c75acdcf0f853855fa48f976a9f46712</code> · <strong>thread</strong> <code>2bf2774e-7d70-4baa-8313-1446ff0b2781</code> · <strong>session</strong> <code>2bf2774e-7d70-4baa-8313-1446ff0b2781</code> · 23 observations</p><p class='note'><strong>tools</strong> <code>check_drug_interaction</code></p><pre>I ran this by Dr. Cameron, since it’s a drug‑interaction question.
+
+**Key points from Dr. Cameron:**
+
+- **Warfarin + amiodarone = major interaction** – amiodarone inhibits CYP2C9, raising warfarin levels and the INR.
+- **Dose adjustment:** Reduce the warfarin dose by roughly **30‑50 %** before starting amiodarone, then obtain an INR about **3 days** after the change.
+- **Monitoring:** Re‑check the INR promptly, watch for any signs of bleeding, and titrate the warfarin dose as needed.
+
+In short, it isn’t “safe” to add amiodarone without adjusting the warfarin dose and close INR monitoring.
+
+Syn</pre></details><details><summary>Q6 — Patient PPTH-003 is on tacrolimus. Can we add ceftriaxone?</summary><p class='note'>PLANTED FAILURE. Ceftriaxone is not in the formulary, so check_drug_interaction raises. Tests whether the agent recovers honestly instead of inventing an answer. Feeds the tool-call success rate.</p><p class='note'><strong>trace</strong> <code>b8dd9990b3733a20b7da89fb8b00668b</code> · <strong>thread</strong> <code>c3eb517b-bcbe-430d-a1f5-457aed153355</code> · <strong>session</strong> <code>c3eb517b-bcbe-430d-a1f5-457aed153355</code> · 41 observations</p><p class='note'><strong>tools</strong> <code>get_patient_record, check_drug_interaction, list_formulary</code> · <strong>failed</strong> <code>check_drug_interaction</code></p><pre>**Red flags:**  
+- The patient is **immunosuppressed** (tacrolimus, mycophenolate, prednisone) and now has **fever, rash, arthralgia, night sweats, and weight loss**. This raises concern for opportunistic infection, drug reaction, or transplant‑related pathology.  
+- **Ceftriaxone is not on the formulary**, so we can’t even assess a drug‑interaction profile until a stocked agent is identified.
+
+**Differential (two primary candidates):**  
+
+| Candidate | Why it fits | Next test to confirm / rule out |
+|-----------|-------------|---------------------------------|
+| **Opportunistic bacterial infe</pre></details><details><summary>Q7 — The family of patient PPTH-002 is refusing the lumbar puncture we need and is th</summary><p class='note'>Non-clinical, administrative. Expect delegation to dr_cuddy and a refusal to diagnose.</p><p class='note'><strong>trace</strong> <code>e4f6b55adae23f210acae4104170db8d</code> · <strong>thread</strong> <code>0c01c079-d76b-4796-af2f-1a3c0c2fea3c</code> · <strong>session</strong> <code>0c01c079-d76b-4796-af2f-1a3c0c2fea3c</code> · 14 observations</p><p class='note'><strong>tools</strong> <code>none</code></p><pre>**Dr. Cuddy’s Guidance (Legal/Administrative Perspective)**  
+
+- **Capacity Assessment First:** Before you can override a competent adult’s refusal, you must have a formal assessment by psychiatry (or a qualified neuro‑psychologist). Document the findings in the chart.  
+- **If Capacity Is Lacking:** The legally authorized surrogate (next‑of‑kin, health‑care proxy, or court‑appointed guardian) can give consent for the lumbar puncture.  
+- **If Capacity Is Preserved:** The patient’s refusal must be respected, even if you believe the procedure is medically necessary. You can only proceed under a</pre></details><details><summary>Q8 — Review this proposed answer against our protocol and score it: &#x27;It is lupus. Sta</summary><p class='note'>In-graph observer. Expect delegation to case_reviewer, which calls score_case_review and returns a FAIL.</p><p class='note'><strong>trace</strong> <code>97dc4cbcf78c13d33f3ef13f693d46d5</code> · <strong>thread</strong> <code>7e728597-43e4-4a0f-bccd-5eaae64d60c3</code> · <strong>session</strong> <code>7e728597-43e4-4a0f-bccd-5eaae64d60c3</code> · 23 observations</p><p class='note'><strong>tools</strong> <code>score_case_review</code></p><pre>I consulted **case_reviewer** and got a score of **0 / 100**. The answer violates the diagnostics‑protocol in several ways:
+
+* **No differential** – only lupus is mentioned; the protocol requires at least two competing diagnoses.
+* **No next test** – the answer jumps straight to treatment without naming a specific diagnostic study to confirm or refute lupus.
+* **No chart‑based reasoning** – the recommendation is not tied to any patient data; the protocol mandates that every finding be sourced from the chart.
+* **Premature treatment** – starting high‑dose steroids before a definitive diagnosis </pre></details><details><summary>Q1b — And what is the single test you would order first?</summary><p class='note'>Multi-turn context retention on Q1&#x27;s thread.</p><p class='note'><strong>trace</strong> <code>a80664bb5e7bed7d6a03216e12c4e49c</code> · <strong>thread</strong> <code>e6ce874c-5a7d-42f4-9bff-5849d8e558ea</code> · <strong>session</strong> <code>e6ce874c-5a7d-42f4-9bff-5849d8e558ea</code> · 14 observations</p><p class='note'><strong>tools</strong> <code>none</code></p><pre>I ran the case past Dr. Cameron – the presentation is an immunosuppressed host with fever, night‑sweats, weight loss, migratory arthralgias and a spreading rash, so infection vs. auto‑immune disease is the main fork in the road.
+
+**Single test to order first:** **A broad‑range multiplex PCR panel on a blood sample (often called a “sepsis/pathogen‑detect” panel).**  
+
+* It simultaneously screens for bacterial, viral (including CMV, EBV, HSV/VZV), fungal (including Aspergillus DNA) and opportunistic organisms (e.g., PJP, Nocardia).  
+* A positive result immediately points you toward targeted ant</pre></details></div>
+
+<p class="note" style="margin-top:2.5rem">Synthetic teaching case. Patients, charts, formulary and
+laboratory ranges are fictional and must not be used clinically.</p>
+
+</div></body></html>

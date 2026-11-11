@@ -1,0 +1,73 @@
+auth_config:
+  tenant_name: houselab
+  token: eyJraWQiOiIyMDI2MDcxMDA4MjgiLCJhbGciOiJSUzI1NiJ9.eyJpYW1faWQiOiJpYW0tU2VydmljZUlkLTM4OWM5NWQ1LTJmYjktNDA1ZC1hZGJjLWQxOWRlOGVlYzdiMSIsImlkIjoiaWFtLVNlcnZpY2VJZC0zODljOTVkNS0yZmI5LTQwNWQtYWRiYy1kMTlkZThlZWM3YjEiLCJyZWFsbWlkIjoiaWFtIiwianRpIjoiZjNiNTg2OWUtMTJhZS00Yjk3LWI5YWMtMWI3Mzc4ODFiMzU4IiwiaWRlbnRpZmllciI6IlNlcnZpY2VJZC0zODljOTVkNS0yZmI5LTQwNWQtYWRiYy1kMTlkZThlZWM3YjEiLCJuYW1lIjoiQXV0by1nZW5lcmF0ZWQgc2VydmljZSBjcmVkZW50aWFscyIsInN1YiI6IlNlcnZpY2VJZC0zODljOTVkNS0yZmI5LTQwNWQtYWRiYy1kMTlkZThlZWM3YjEiLCJ1bmlxdWVfaW5zdGFuY2VfY3JucyI6WyJjcm46djE6Ymx1ZW1peDpwdWJsaWM6d2F0c29ueC1vcmNoZXN0cmF0ZTp1cy1zb3V0aDphLzY2NTUxNTM1NDAyOGJmOTY3YmJjZGI4ZWYzMGMyYmNhOmZmYmM5MjliLTg1YWItNGU1OC04MzI0LWRlOTM5Y2ExOTBjMjo6Il0sInN1Yl90eXBlIjoiU2VydmljZUlkIiwiYXV0aG4iOnsic3ViIjoiU2VydmljZUlkLTM4OWM5NWQ1LTJmYjktNDA1ZC1hZGJjLWQxOWRlOGVlYzdiMSIsImlhbV9pZCI6ImlhbS1TZXJ2aWNlSWQtMzg5Yzk1ZDUtMmZiOS00MDVkLWFkYmMtZDE5ZGU4ZWVjN2IxIiwic3ViX3R5cGUiOiJTZXJ2aWNlSWQiLCJuYW1lIjoiQXV0by1nZW5lcmF0ZWQgc2VydmljZSBjcmVkZW50aWFscyJ9LCJhcGlrZXlfdXVpZCI6IkFwaUtleS1iOWY2ZWZiZS00YTQ1LTRmYjItYTBiZC0xMWZmNmIwYWEzOTgiLCJhY2NvdW50Ijp7InZhbGlkIjp0cnVlLCJic3MiOiI2NjU1MTUzNTQwMjhiZjk2N2JiY2RiOGVmMzBjMmJjYSIsImZyb3plbiI6dHJ1ZX0sImlhdCI6MTc4NTkyNTkyNywiZXhwIjoxNzg1OTI5NTI3LCJpc3MiOiJodHRwczovL2lhbS5jbG91ZC5pYm0uY29tL2lkZW50aXR5IiwiZ3JhbnRfdHlwZSI6InVybjppYm06cGFyYW1zOm9hdXRoOmdyYW50LXR5cGU6YXBpa2V5Iiwic2NvcGUiOiJpYm0gb3BlbmlkIiwiY2xpZW50X2lkIjoiZGVmYXVsdCIsImFjciI6MSwiYW1yIjpbInB3ZCJdfQ.AotBeOAyELBPsJxPQ-sniI1EbQJ-Z7msJO71I2dfwQYL9niiUQ1vl8GQegTzjck2MlktabbqaB6McmcBF_GeL-L5ydKYJQZQMBj4SHvZmPgt3EjZXoNZ45r1WvbaizP_Jvyo4ThNXO5Oc-B9mCAgACgpaOA-ANen0HyPG-KCMk-sZaXxMu7EDdePnXbSx2Zmwwo3TbsTsgk9WC3-aEEC_WUh3XU_jsnxJJ1IDganPNFaO4ZBOjliwDJTyrRCg9uRpYy_9iLozOHaGn-WBeeY4dhqJKI2ojduL9IsCVuEbN_ky-ZxRQUnRvXmhVZMWH5SBi3aQyPeDm1vMXZpFzyC2g
+  url: https://api.us-south.watson-orchestrate.cloud.ibm.com/instances/<YOUR_INSTANCE_ID>
+collection_name: default-collection
+custom_metrics_config: null
+data_annotation_run: false
+enable_fuzzy_matching: false
+enable_manual_user_input: false
+enable_recursive_search: false
+enable_verbose_logging: true
+error_keywords: []
+evaluation_config:
+  provider_config:
+    embedding_model_id: sentence-transformers/all-minilm-l6-v2
+    model_id: watsonx/openai/gpt-oss-120b
+    provider: gateway
+    provider_params: {}
+    referenceless_eval: false
+    vendor: ibm
+evaluation_model: watsonx/openai/gpt-oss-120b
+extractors_config:
+  paths: null
+is_adk: true
+is_strict: true
+langfuse_enabled: false
+llm_user_config:
+  enable_structured_output: false
+  model_id: meta-llama/llama-3-3-70b-instruct
+  personas: []
+  prompt_config: /Users/coredump/Desktop/Bob and WxO/house-md-lab/.venv/lib/python3.14/site-packages/agentops/prompt/llama_user_prompt.jinja2
+  provider_config: null
+  user_response_style: []
+  version: v1
+max_user_turns: 20
+metrics:
+- JourneySuccessMetric
+- ToolCalling
+- OrchestrateAgentRoutingAccuracy
+- StepMetrics
+- AgentResponseTime
+- KnowledgeBaseAnswerRelevancy
+- DocumentRetrievalQuality
+- KnowledgeBaseFaithfulness
+- RetrievalConfidence
+- ToolParameterF1
+n_runs: 1
+num_workers: 2
+operator_configs:
+  AttackSuccessMetric: {}
+  JourneyCompletion: {}
+  JourneySuccessMetric: {}
+  TextMatchMetric: {}
+output_dir: eval/out/native_agent_evaluations/2026-08-05_13-44-16
+provider_config:
+  embedding_model_id: sentence-transformers/all-minilm-l6-v2
+  model_id: watsonx/openai/gpt-oss-120b
+  provider: gateway
+  provider_params: {}
+  referenceless_eval: false
+  vendor: ibm
+similarity_threshold: 0.8
+skip_available_results: false
+skip_legacy_evaluation: true
+tags: []
+test_paths:
+- eval/out/native_agent_evaluations/generated_test_data/native_agent_evaluation_test_0.json
+- eval/out/native_agent_evaluations/generated_test_data/native_agent_evaluation_test_1.json
+- eval/out/native_agent_evaluations/generated_test_data/native_agent_evaluation_test_2.json
+text_match_config:
+  keyword_template_path: null
+  semantic_template_path: null
+wxo_lite_version: 2.13.0

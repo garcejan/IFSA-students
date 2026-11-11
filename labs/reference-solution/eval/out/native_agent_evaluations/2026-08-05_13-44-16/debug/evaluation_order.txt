@@ -1,0 +1,73 @@
+Evaluation Order
+┣━━ OrchestrateAgentRoutingAccuracy|[('_llm_client', 
+┃   <agentops.service_provider.gateway_provider.GatewayProvider object at 
+┃   0x114353ed0>)]
+┣━━ StepMetrics|[('_llm_client', 
+┃   <agentops.service_provider.gateway_provider.GatewayProvider object at 
+┃   0x114353ed0>)]
+┣━━ AgentResponseTime|[('_llm_client', 
+┃   <agentops.service_provider.gateway_provider.GatewayProvider object at 
+┃   0x114353ed0>)]
+┣━━ ExpectedToolExtractor|[('_llm_client', 
+┃   <agentops.service_provider.gateway_provider.GatewayProvider object at 
+┃   0x114353ed0>)]
+┣━━ KnowledgeBaseExtractor|[('_llm_client', 
+┃   <agentops.service_provider.gateway_provider.GatewayProvider object at 
+┃   0x114353ed0>)]
+┣━━ ToolResponseErrorExtractor|[('_llm_client', None), ('error_keywords', 
+┃   ['error', 'erroneous', 'exception', 'traceback', 'failed', 'fail', 'fatal', 
+┃   'panic', 'abort', 'not found', 'notfound', 'cannot', "can't", 'unable', 
+┃   'unsuccessful', 'invalid', 'incorrect', 'illegal', 'unknown', 'unexpected', 
+┃   'unauthorized', 'permission denied', 'denied', 'forbidden', 'forbidden 
+┃   request', 'unavailable', 'unreachable', 'missing', 'exceeded', 'exceeds 
+┃   limit', 'timed out', 'timeout', 'stack trace', 'syntax error', 'runtime 
+┃   error', 'indexerror', 'keyerror', 'valueerror', 'typeerror', 
+┃   'zerodivisionerror', 'segmentation fault', 'segfault', 'core dumped', 
+┃   'memory error', 'out of memory', 'oom', 'overflow', 'underflow', 'crash', 
+┃   'bad request', 'http_code=400', 'http_code=401', 'http_code=403', 
+┃   'http_code=404', 'http_code=405', 'http_code=408', 'http_code=409', 
+┃   'http_code=429', 'http_code=500', 'http_code=503', 'http_code=504', 
+┃   'connection refused', 'connection error', 'broken pipe', 'bus error', 
+┃   'catastrophic failure', 'unresolved', 'infinite recursion', 'overrun', 
+┃   'overwrite', 'no such file or directory', 'invalid argument', 'server is 
+┃   down', 'server error', 'sql error', 'db error', 'database error'])]
+┣━━ AgentResponseExtractor|[('_llm_client', None)]
+┣━━ ToolCalling|[('_llm_client', 
+┃   <agentops.service_provider.gateway_provider.GatewayProvider object at 
+┃   0x114353ed0>)]
+┣━━ ToolParameterF1|[('_llm_client', 
+┃   <agentops.service_provider.gateway_provider.GatewayProvider object at 
+┃   0x114353ed0>)]
+┣━━ KnowledgeBaseAnswerRelevancy|[('_llm_client', 
+┃   <agentops.service_provider.gateway_provider.GatewayProvider object at 
+┃   0x114353ed0>), ('rag_judge', <agentops.llm_rag_eval.LLMJudge object at 
+┃   0x1145c63c0>)]
+┣━━ DocumentRetrievalQuality|[('_llm_client', 
+┃   <agentops.service_provider.gateway_provider.GatewayProvider object at 
+┃   0x114353ed0>)]
+┣━━ KnowledgeBaseFaithfulness|[('_llm_client', 
+┃   <agentops.service_provider.gateway_provider.GatewayProvider object at 
+┃   0x114353ed0>), ('rag_judge', <agentops.llm_rag_eval.LLMJudge object at 
+┃   0x114352490>)]
+┣━━ RetrievalConfidence|[('_llm_client', 
+┃   <agentops.service_provider.gateway_provider.GatewayProvider object at 
+┃   0x114353ed0>)]
+┣━━ KeywordMatchMetric|[('_llm_client', 
+┃   <agentops.service_provider.gateway_provider.GatewayProvider object at 
+┃   0x114353ed0>), ('keyword_template', 
+┃   <agentops.prompt.template_render.KeywordMatchingTemplateRenderer object at 
+┃   0x1145c5400>)]
+┣━━ SemanticMatchMetric|[('_llm_client', 
+┃   <agentops.service_provider.gateway_provider.GatewayProvider object at 
+┃   0x114353ed0>), ('enable_fuzzy_matching', False), ('prompt_path', 
+┃   PosixPath('/Users/coredump/Desktop/Bob and 
+┃   WxO/house-md-lab/.venv/lib/python3.14/site-packages/agentops/prompt/gpt/sema
+┃   ntic_matching_prompt_v2.jinja2')), ('semantic_template', 
+┃   <agentops.prompt.template_render.SemanticMatchingTemplateRenderer object at 
+┃   0x11434b380>), ('similarity_threshold', 0.8)]
+┣━━ TextMatchMetric|[('_llm_client', 
+┃   <agentops.service_provider.gateway_provider.GatewayProvider object at 
+┃   0x114353ed0>)]
+┗━━ JourneySuccessMetric|[('_llm_client', 
+    <agentops.service_provider.gateway_provider.GatewayProvider object at 
+    0x114353ed0>), ('is_strict', True)]

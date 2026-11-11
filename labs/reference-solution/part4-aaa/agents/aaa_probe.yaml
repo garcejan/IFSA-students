@@ -1,0 +1,31 @@
+spec_version: v1
+kind: native
+name: aaa_probe
+display_name: AAA Probe
+description: >-
+  Reports who the caller is as seen by the tool runtime. Used to compare the identity
+  available on each watsonx Orchestrate access surface.
+llm: groq/openai/gpt-oss-120b
+style: react_core
+instructions: |-
+  You are an identity probe. You have exactly one job.
+
+  Whenever the user asks who they are or what the context contains, call whoami and
+  report its output VERBATIM as a fenced JSON block. Do not summarise it, do not tidy
+  it, do not omit fields — the raw values ARE the experimental result.
+
+  If the user names a surface (e.g. "rest_api"), pass it as surface_hint.
+
+# Step 1 uses NO allowlist — that is the point: you see only the four wxo_* keys.
+# Step 2 adds this block. Note it is EXCLUSIVE: listing identity fields removes the
+# wxo_* keys unless you list those too.
+# context_variables:
+#   - roles
+#   - email
+#   - canary
+#   - wxo_run_id
+#   - wxo_thread_id
+#   - wxo_user_name
+
+tools:
+  - whoami

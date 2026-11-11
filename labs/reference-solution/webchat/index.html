@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Princeton-Plainsboro — Diagnostics</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --plane:  #f9f9f7;
+    --surface:#fcfcfb;
+    --ink:    #0b0b0b;
+    --ink-2:  #52514e;
+    --muted:  #898781;
+    --rule:   #e1e0d9;
+    --accent: #2a78d6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --plane:  #0d0d0d;
+      --surface:#1a1a19;
+      --ink:    #ffffff;
+      --ink-2:  #c3c2b7;
+      --muted:  #898781;
+      --rule:   #2c2c2a;
+      --accent: #3987e5;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
+    background: var(--plane);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+  .wrap { max-width: 46rem; margin: 0 auto; padding: 4rem 1.5rem; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    padding: 2rem 2.25rem;
+  }
+  .eyebrow {
+    font-size: .75rem; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--muted); margin: 0 0 .5rem;
+  }
+  h1 { font-size: 1.9rem; line-height: 1.2; margin: 0 0 .75rem; }
+  p  { color: var(--ink-2); margin: 0 0 1rem; }
+  ul { color: var(--ink-2); padding-left: 1.2rem; margin: 0 0 1rem; }
+  li { margin: .3rem 0; }
+  code {
+    font: .875em ui-monospace, SFMono-Regular, Menlo, monospace;
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    padding: .1em .4em; border-radius: 4px;
+  }
+  .hint {
+    margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--rule);
+    font-size: .9rem; color: var(--muted);
+  }
+  .dot {
+    display: inline-block; width: .5rem; height: .5rem; border-radius: 50%;
+    background: var(--accent); margin-right: .5rem; vertical-align: middle;
+  }
+</style>
+</head>
+<body>
+
+  <!-- The web-chat launcher mounts into this element. rootElementID must match. -->
+  <div id="root"></div>
+
+  <div class="wrap">
+    <div class="card">
+      <p class="eyebrow">Princeton-Plainsboro Teaching Hospital</p>
+      <h1>Department of Diagnostic Medicine</h1>
+      <p>
+        Ask Dr House about a patient. He pulls the chart, frames the case, and brings in
+        whichever colleague owns the finding — Wilson, Foreman, Chase, Cameron or Cuddy.
+      </p>
+      <p>Try one of these:</p>
+      <ul>
+        <li><code>Take the case of patient PPTH-003. What are we looking at?</code></li>
+        <li><code>Patient PPTH-001 had sudden aphasia then a seizure. What is causing it?</code></li>
+        <li><code>Patient PPTH-004 is on warfarin. Can we add amiodarone?</code></li>
+        <li><code>The family of PPTH-002 is refusing an LP and threatening to sue.</code></li>
+      </ul>
+      <div class="hint">
+        <span class="dot"></span>Open the launcher in the corner to start.
+        Synthetic teaching case — not medical advice.
+      </div>
+    </div>
+  </div>
+
+<!--
+  ────────────────────────────────────────────────────────────────────────────
+  PASTE YOUR OWN SNIPPET BELOW.
+
+  Generate it against YOUR instance with:
+
+      CRN=$(python3 -c "
+      import yaml,os,json,base64
+      t=yaml.safe_load(open(os.path.expanduser('~/.cache/orchestrate/credentials.yaml')))['auth']['<YOUR_ENV>']['wxo_mcsp_token']
+      p=t.split('.')[1]; p+='='*(-len(p)%4)
+      print(json.loads(base64.urlsafe_b64decode(p))['unique_instance_crns'][0])")
+
+      echo "$CRN" | COLUMNS=400 orchestrate channels webchat embed \
+          --agent-name dr_house --env live
+
+  Two gotchas, both live-verified:
+    1. The command tries to fetch the CRN from the IBM Cloud resource-controller and
+       gets 403 with an instance-scoped API key, then prompts interactively and
+       aborts in a script. Piping the CRN from the bearer token (above) fixes it.
+    2. The CLI renders the snippet to the terminal width, so it arrives hard-wrapped
+       and broken. COLUMNS=400 keeps each line intact.
+
+  The values below are placeholders — the page will not connect until you replace
+  the whole <script> block with your own output.
+  ────────────────────────────────────────────────────────────────────────────
+-->
+<script>
+    window.wxOConfiguration = {
+        orchestrationID: "<YOUR_TENANT>_<YOUR_INSTANCE_ID>",
+        hostURL: "https://us-south.watson-orchestrate.cloud.ibm.com",
+        rootElementID: "root",
+        showLauncher: true,
+        crn: "crn:v1:bluemix:public:watsonx-orchestrate:us-south:a/<ACCOUNT>:<INSTANCE_ID>::",
+        deploymentPlatform: "ibmcloud",
+        chatOptions: {
+            agentId: "<DR_HOUSE_AGENT_ID>",
+            agentEnvironmentId: "<AGENT_ENVIRONMENT_ID>"
+        }
+    };
+
+    setTimeout(function () {
+        const script = document.createElement('script');
+        script.src = `${window.wxOConfiguration.hostURL}/wxochat/wxoLoader.js?embed=true`;
+        script.addEventListener('load', function () {
+            wxoLoader.init();
+        });
+        document.head.appendChild(script);
+    }, 0);
+</script>
+
+</body>
+</html>

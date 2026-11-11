@@ -1,0 +1,52 @@
+env=houselab
+
+=== Q1  Take the case of patient PPTH-003. What are we looking at?
+    status=completed  wall=6.264s
+    tools=['get_patient_record', 'load_skill']
+    delegated=[]  expected=None  -> PASS
+=== Q2  Patient PPTH-001 had sudden aphasia and then a seizure, with a fever. 
+    status=completed  wall=5.778s
+    tools=['get_patient_record', 'load_skill']
+    delegated=[]  expected=dr_foreman  -> MISROUTE
+=== Q3  Patient PPTH-003 has drenching night sweats and has lost weight. Her L
+    status=completed  wall=15.699s
+    tools=['get_patient_record', 'chat_with_collaborator_dr_wilson_oncology', 'lab_reference']
+    delegated=['dr_wilson_oncology']  expected=dr_wilson  -> MISROUTE
+=== Q4  Patient PPTH-004 is confused with an irregular heart rate of 148 and a
+    status=completed  wall=12.239s
+    tools=['get_patient_record', 'load_skill']
+    delegated=[]  expected=dr_chase  -> MISROUTE
+=== Q5  Patient PPTH-004 is on warfarin. Cardiology wants to add amiodarone. I
+    status=completed  wall=12.999s
+    tools=['chat_with_collaborator_dr_cameron', 'check_drug_interaction']
+    delegated=['dr_cameron']  expected=dr_cameron  -> PASS
+=== Q6  Patient PPTH-003 is on tacrolimus. Can we add ceftriaxone?
+    status=completed  wall=17.881s
+    tools=['get_patient_record', 'chat_with_collaborator_dr_cameron', 'check_drug_interaction', 'list_formulary']
+    delegated=['dr_cameron']  expected=dr_cameron  -> PASS
+    tool failures=['check_drug_interaction']
+=== Q7  The family of patient PPTH-002 is refusing the lumbar puncture we need
+    status=completed  wall=4.09s
+    tools=[]
+    delegated=[]  expected=dr_cuddy  -> MISROUTE
+=== Q8  Review this proposed answer against our protocol and score it: 'It is 
+    status=completed  wall=5.681s
+    tools=['chat_with_collaborator_case_reviewer', 'score_case_review']
+    delegated=['case_reviewer']  expected=case_reviewer  -> PASS
+
+=== Q1b (multi-turn on thread 8dbf1747)  And what is the single test you would order first?
+    status=completed  wall=3.166s
+
+waiting 12s for traces to settle...
+  Q1: trace 1e7db62d6853... obs=18 err=None
+  Q2: trace 52074b90da10... obs=18 err=None
+  Q3: trace b82e75c11634... obs=30 err=None
+  Q4: trace bc811bd08bbc... obs=18 err=None
+  Q5: trace cf510320bf5d... obs=23 err=None
+  Q6: trace f134ed146262... obs=38 err=None
+  Q7: trace f274a5faf2fe... obs=5 err=None
+  Q8: trace 77a919c55f1f... obs=23 err=None
+  Q1b: trace 8a525ed698a4... obs=5 err=None
+
+routing: 5/9 as expected
+wrote /Users/coredump/Desktop/Bob and WxO/house-md-lab/test/results/session.json

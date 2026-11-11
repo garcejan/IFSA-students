@@ -1,0 +1,23 @@
+{
+    "orchestrate_agent_routing_accuracy": 0.0,
+    "total_steps": 10,
+    "llm_steps": 5,
+    "average_agent_response_time": 2.222,
+    "total_tool_calls": 2,
+    "expected_tool_calls": 0,
+    "correct_tool_calls": NaN,
+    "missed_tool_calls": 0,
+    "relevant_tool_calls": 0,
+    "tool_calls_with_incorrect_parameter": NaN,
+    "tool_call_recall": NaN,
+    "tool_call_precision": NaN,
+    "tool_match_success": true,
+    "tool_parameter_f1": NaN,
+    "keyword_match": false,
+    "semantic_match": false,
+    "text_match": 0,
+    "is_success": false,
+    "run_idx": 1,
+    "dataset_name": "native_agent_evaluation_test_1",
+    "text_match_comment": "Matched 0/1 text goals"
+}
