@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-paper: #f3f8fb;
+  --color-ink: #0b1b2b;
+  --color-ink-2: #3d5266;
+  --color-muted: #7b8ea0;
+  --color-line: #d8e4ec;
+  --color-teal: #00a79d;
+  --color-cyan: #19c3e6;
+  --color-signal: #ef4f6a;
+  --color-night: #06121d;
+  --font-sans: var(--font-plex-sans);
+  --font-mono: var(--font-plex-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-plex-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: #19c3e655;
+}
+
+/* Clinical graph paper */
+.grid-paper {
+  background-image:
+    linear-gradient(to right, rgb(0 167 157 / 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(0 167 157 / 0.07) 1px, transparent 1px),
+    linear-gradient(to right, rgb(0 167 157 / 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(0 167 157 / 0.04) 1px, transparent 1px);
+  background-size: 96px 96px, 96px 96px, 24px 24px, 24px 24px;
+}
+
+.grid-paper-dark {
+  background-image:
+    linear-gradient(to right, rgb(25 195 230 / 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(25 195 230 / 0.07) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+.glass {
+  background: rgb(255 255 255 / 0.62);
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  border: 1px solid rgb(255 255 255 / 0.7);
+}
+
+.glass-dark {
+  background: rgb(255 255 255 / 0.05);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgb(255 255 255 / 0.1);
+}
+
+.text-gradient {
+  background: linear-gradient(100deg, #00a79d 0%, #19c3e6 45%, #2a6df4 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* The placeholder disappears the moment something is mounted into #wxo-chat-root */
+.chat-frame:has(#wxo-chat-root > *) .chat-placeholder {
+  display: none;
+}
+
+@keyframes scan {
+  0% { transform: translateY(-10%); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(110%); opacity: 0; }
+}
+
+.scanline {
+  animation: scan 5s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .scanline { animation: none; }
+}
