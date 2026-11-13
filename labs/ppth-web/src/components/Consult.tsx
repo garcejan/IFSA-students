@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 
 const STARTERS = [
@@ -27,6 +27,48 @@ export default function Consult() {
     setCopied(i);
     setTimeout(() => setCopied(null), 1400);
   };
+
+  // =========================================================================
+  // WATSONX ORCHESTRATE EMBED POINT
+  // The embedding script belongs here inside a useEffect hook.
+  // This guarantees that #wxo-chat-root is rendered in the DOM before
+  // wxoLoader initializes.
+  // =========================================================================
+  useEffect(() => {
+    const container = document.getElementById("wxo-chat-root");
+    if (!container) return;
+
+    (window as any).wxOConfiguration = {
+      orchestrationID: "d212b1d79d9a4ae0825d28413287c962_256e3d0d-76f6-47c0-90bf-d8fa30e789ed",
+      hostURL: "https://eu-de.watson-orchestrate.cloud.ibm.com",
+      rootElementID: "wxo-chat-root",
+      deploymentPlatform: "ibmcloud",
+      crn: "crn:v1:bluemix:public:watsonx-orchestrate:eu-de:a/d212b1d79d9a4ae0825d28413287c962:256e3d0d-76f6-47c0-90bf-d8fa30e789ed::",
+      chatOptions: {
+        agentId: "a397236a-b813-48ee-977c-47dd322e6928",
+        agentEnvironmentId: "e111c9d9-e652-4420-9069-b55f000f1951",
+      },
+      layout: {
+        form: "custom",
+        showOrchestrateHeader: true,
+        customElement: container,
+      },
+      showLauncher: false,
+    };
+
+    const scriptId = "wxo-loader-script";
+    if (!document.getElementById(scriptId)) {
+      const script = document.createElement("script");
+      script.id = scriptId;
+      script.src = `${(window as any).wxOConfiguration.hostURL}/wxochat/wxoLoader.js?embed=true`;
+      script.addEventListener("load", function () {
+        (window as any).wxoLoader?.init();
+      });
+      document.head.appendChild(script);
+    } else if ((window as any).wxoLoader) {
+      (window as any).wxoLoader.init();
+    }
+  }, []);
 
   return (
     <section id="consult" className="grid-paper-dark relative overflow-hidden bg-night px-6 py-32 text-white">
