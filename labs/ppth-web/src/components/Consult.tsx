@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, memo } from "react";
 import { motion } from "motion/react";
 
 const STARTERS = [
@@ -11,16 +11,36 @@ const STARTERS = [
 ];
 
 /**
+ * Isolated mount container.
+ * Wrapped in React.memo and using dangerouslySetInnerHTML to prevent React 19
+ * from reconciling or wiping out third-party DOM nodes injected by wxoLoader
+ * when the parent component re-renders (e.g. on animations or click interactions).
+ */
+const ChatMount = memo(
+  function ChatMount() {
+    return (
+      <div
+        id="wxo-chat-root"
+        className="absolute inset-0"
+        dangerouslySetInnerHTML={{ __html: "" }}
+        suppressHydrationWarning
+      />
+    );
+  },
+  () => true
+);
+
+/**
  * EMBED POINT
  * ----------
  * `#wxo-chat-root` is an empty, full-size container reserved for the chat.
  * Mount your embedded chat into it (e.g. rootElementID: "wxo-chat-root").
  * As soon as it has a child element, the placeholder behind it is hidden by CSS
  * (see `.chat-frame:has(#wxo-chat-root > *)` in globals.css).
- * React renders it with no children, so it will never fight a third-party script.
  */
 export default function Consult() {
   const [copied, setCopied] = useState<number | null>(null);
+  const chatInstanceRef = useRef<any>(null);
 
   const copy = (text: string, i: number) => {
     navigator.clipboard?.writeText(text);
@@ -35,39 +55,61 @@ export default function Consult() {
   // wxoLoader initializes.
   // =========================================================================
   useEffect(() => {
-    const container = document.getElementById("wxo-chat-root");
-    if (!container) return;
+    let unmounted = false;
 
-    (window as any).wxOConfiguration = {
-      orchestrationID: "d212b1d79d9a4ae0825d28413287c962_256e3d0d-76f6-47c0-90bf-d8fa30e789ed",
-      hostURL: "https://eu-de.watson-orchestrate.cloud.ibm.com",
-      rootElementID: "wxo-chat-root",
-      deploymentPlatform: "ibmcloud",
-      crn: "crn:v1:bluemix:public:watsonx-orchestrate:eu-de:a/d212b1d79d9a4ae0825d28413287c962:256e3d0d-76f6-47c0-90bf-d8fa30e789ed::",
-      chatOptions: {
-        agentId: "a397236a-b813-48ee-977c-47dd322e6928",
-        agentEnvironmentId: "e111c9d9-e652-4420-9069-b55f000f1951",
-      },
-      layout: {
-        form: "custom",
-        showOrchestrateHeader: true,
-        customElement: container,
-      },
-      showLauncher: false,
+    const initChat = () => {
+      const container = document.getElementById("wxo-chat-root");
+      if (!container || !(window as any).wxoLoader || unmounted) return;
+
+      const config = {
+        orchestrationID: "d212b1d79d9a4ae0825d28413287c962_256e3d0d-76f6-47c0-90bf-d8fa30e789ed",
+        hostURL: "https://eu-de.watson-orchestrate.cloud.ibm.com",
+        rootElementID: "wxo-chat-root",
+        deploymentPlatform: "ibmcloud",
+        crn: "crn:v1:bluemix:public:watsonx-orchestrate:eu-de:a/d212b1d79d9a4ae0825d28413287c962:256e3d0d-76f6-47c0-90bf-d8fa30e789ed::",
+        chatOptions: {
+          agentId: "a397236a-b813-48ee-977c-47dd322e6928",
+          agentEnvironmentId: "e111c9d9-e652-4420-9069-b55f000f1951",
+          onLoad: (instance: any) => {
+            chatInstanceRef.current = instance;
+          },
+        },
+        layout: {
+          form: "custom",
+          showOrchestrateHeader: true,
+          customElement: container,
+        },
+        showLauncher: false,
+      };
+
+      (window as any).wxOConfiguration = config;
+      (window as any).wxoLoader.init(config);
     };
 
     const scriptId = "wxo-loader-script";
     if (!document.getElementById(scriptId)) {
       const script = document.createElement("script");
       script.id = scriptId;
-      script.src = `${(window as any).wxOConfiguration.hostURL}/wxochat/wxoLoader.js?embed=true`;
-      script.addEventListener("load", function () {
-        (window as any).wxoLoader?.init();
+      script.src = "https://eu-de.watson-orchestrate.cloud.ibm.com/wxochat/wxoLoader.js?embed=true";
+      script.addEventListener("load", () => {
+        initChat();
       });
       document.head.appendChild(script);
     } else if ((window as any).wxoLoader) {
-      (window as any).wxoLoader.init();
+      initChat();
     }
+
+    return () => {
+      unmounted = true;
+      if (chatInstanceRef.current && typeof chatInstanceRef.current.destroy === "function") {
+        try {
+          chatInstanceRef.current.destroy();
+        } catch {
+          // Ignore destroy errors during unmount
+        }
+        chatInstanceRef.current = null;
+      }
+    };
   }, []);
 
   return (
@@ -142,8 +184,8 @@ export default function Consult() {
             </div>
           </div>
 
-          {/* Mount point. Intentionally empty. */}
-          <div id="wxo-chat-root" className="absolute inset-0" />
+          {/* Mount point. Protected from React reconciliation by ChatMount memo and dangerouslySetInnerHTML */}
+          <ChatMount />
         </motion.div>
       </div>
     </section>
