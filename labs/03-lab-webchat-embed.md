@@ -17,7 +17,7 @@ To embed the agent, you need five specific parameters from your deployed `dr_hou
 1. **Log in** to your IBM watsonx Orchestrate instance.
 2. Navigate to the **Agents** tab or agents list and select your orchestrator agent, **`dr_house`**.
 3. In the agent details view, click on the **Deploy** tab at the top.
-4. From the left-hand menu under Deploy, click on **Embedded agent** (sometimes labeled *Embed agent* or *Web chat* channel).
+4. From the left-hand menu under **Deploy** -> **Live**, click on **Embedded agent** (sometimes labeled *Embed agent* or *Web chat* channel).
 5. Locate the **Embed code** section. This block contains an HTML snippet that looks like this:
 
 ```html

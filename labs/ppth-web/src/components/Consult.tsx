@@ -57,7 +57,7 @@ export default function Consult() {
   useEffect(() => {
     // =========================================================================
     // TODO: PLACE YOUR CREDENTIALS FROM WATSONX ORCHESTRATE HERE
-    // Follow the tutorial in /labs/WORKSHOP-part2-EMBED.md to obtain these values.
+    // Follow the tutorial in /labs/03-lab-webchat-embed.md to obtain these values.
     // =========================================================================
 
     const orchestrationID = "";  // PLACE HERE: orchestrationID 

@@ -398,4 +398,4 @@ importantly — correctly distrusted, and a report you could attach to a status 
 
 Everything so far has been about **answer quality**. Now, before jumping into operational monitoring, let's embed this agent into a beautiful Next.js web interface to see it in action from a user's perspective.
 
-**[Continue to Part 2-EMBED — Embed in Web App →](WORKSHOP-part2-EMBED.md)**
+**[Continue to Part 3 — Embed in a web app →](03-lab-webchat-embed.md)**

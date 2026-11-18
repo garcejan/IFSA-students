@@ -56,18 +56,19 @@ test/
     before-routing-fix/   the FAILING baseline: 5/9 routing, before the fix
     example_trace_with_judge_score.json
 eval/out/        a real `orchestrate evaluations validate-native` run
-webchat/         index.html - embedded web-chat page (placeholders, paste your own snippet)
+webchat/         index.html - standalone embedded web-chat page (Part 4 Step 7; placeholders, paste your own snippet)
+part4-aaa/       optional, no lab guide: auth/authz/accounting plugins, PII control, App ID demo
 import-all.sh · delete-all.sh
 ```
 
 ## The two deliberate defects
 
-Both are load-bearing for Part 3. **Do not fix them.**
+Both are load-bearing for Part 4. **Do not fix them.**
 
 | Where | What | Found in |
 |-------|------|----------|
-| `tools/lab_reference.py` | `time.sleep(4.5)` — a slow Laboratory Information System | Part 3 Step 3, from the trace |
-| `tools/drug_interaction.py` | raises for any drug outside the formulary | Part 2 Step D, Part 3 Step 5 |
+| `tools/lab_reference.py` | `time.sleep(4.5)` — a slow Laboratory Information System | Part 4 Step 3, from the trace |
+| `tools/drug_interaction.py` | raises for any drug outside the formulary | Part 2 Step D, Part 4 Step 5 |
 
 ## Measured results from the authoring run
 

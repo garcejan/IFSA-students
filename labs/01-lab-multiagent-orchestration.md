@@ -72,7 +72,7 @@ knows these rules from the skill; your job is to check it obeyed them.
 
 We are also **deliberately planting two defects**. This is a lab about operating a system,
 and a system that never misbehaves teaches you nothing. One tool will be slow. One tool
-will fail on a realistic input. In Part 3 you will find both from telemetry alone.
+will fail on a realistic input. In Part 4 you will find both from telemetry alone.
 
 ### Prompt
 
@@ -103,14 +103,14 @@ Five files:
    against a reference range for about ten common tests. DELIBERATE LAB DEVICE: this tool
    must time.sleep(4.5) before returning, simulating a slow Laboratory Information System.
    Put a clear module-level comment saying the stall is intentional, that it is the planted
-   latency for Part 3, and that it must not be "fixed". Raise ValueError for an unknown test.
+   latency for Part 4, and that it must not be "fixed". Raise ValueError for an unknown test.
 
 4. drug_interaction.py - check_drug_interaction(drug_a: str, drug_b: str) and
    list_formulary(). A synthetic formulary of about thirteen drugs and seven documented
    interactions with severity, mechanism and management. DELIBERATE LAB DEVICE:
    check_drug_interaction must raise ValueError when either drug is not in the formulary,
    naming the missing drug and pointing at list_formulary. Comment that this planted
-   failure is what the tool-call success rate measures in Part 3.
+   failure is what the tool-call success rate measures in Part 4.
 
 5. case_review.py - score_case_review(...) taking five booleans (named_differential,
    cited_next_test, flagged_red_flags, used_patient_record,
@@ -124,7 +124,7 @@ Every tool is READ_ONLY. Everything is synthetic - no real clinical content.
 ### Expected output
 
 Five files. Ask Bob to show you `lab_reference.py` and confirm the `time.sleep(4.5)` is
-there with the comment — if Bob "helpfully" removed it, Part 3 has no exercise.
+there with the comment — if Bob "helpfully" removed it, Part 4 has no exercise.
 
 ### The warning you are about to see, and should ignore
 
@@ -473,4 +473,4 @@ You have also seen the two things that make wxO multi-agent work land or fail:
 **routing is driven by descriptions**, and **an orchestrator that is allowed to answer will
 answer**.
 
-**[Continue to Part 2 — Test & evaluate →](WORKSHOP-part2-IDE.md)**
+**[Continue to Part 2 — Test & evaluate →](02-lab-test-evaluate.md)**

@@ -14,7 +14,6 @@ This lab assumes **exactly three things** and nothing else:
 
 1. **Bob** (the agentic IDE) — running on your laptop
 2. The **`watsonx-orchestrate` skill**, installed into Bob from the CE Bob Marketplace or manual
-   — plus the **`watsonx-orchestrate-aaa`** companion skill if you are doing **Part 4**
 3. **A watsonx Orchestrate instance** — your own, or one provisioned from TechZone by Client Engineering
 
 No pre-cloned repo, no scaffolding, no `pip install` you run by hand. Everything below is
@@ -56,7 +55,7 @@ flowchart TB
     end
   end
 
-  subgraph plane["Control plane — what you operate on in Part 3"]
+  subgraph plane["Control plane — what you operate on in Part 4"]
     direction LR
     traces["observability traces<br/>AgentOps v3 API"]
     evals["evaluations<br/>validate-native"]
@@ -91,23 +90,28 @@ measure and debug for the rest of the lab.
 > goes to Foreman and a lawsuit goes to Cuddy. The medicine is synthetic and deliberately
 > shallow; the orchestration is real.
 
-### The three parts
+### The four parts
 
 | Part | You do | Time |
 |------|--------|------|
-| **[Part 1 — Build](WORKSHOP-part1-IDE.md)** | Build the team from nothing by prompting Bob: tools, an agent skill, six specialists, an orchestrator. Import, deploy, and **fix the routing when it does not work first time**. Export everything to your laptop and prove you can restore it. | ~60 min |
-| **[Part 2 — Test & evaluate](WORKSHOP-part2-IDE.md)** | Single-turn and multi-turn testing through Bob. Add the in-graph **observer** agent. Run the wxO **evaluations** framework. Have Bob write you an **HTML5 evaluation report**. | ~50 min |
-| **[Part 2-EMBED — Embed in Web App](WORKSHOP-part2-EMBED.md)** | Retrieve credentials from watsonx Orchestrate, configure local allowed domains, place them into the Next.js web application, and run the app locally. | ~20 min |
-| **[Part 3 — Operate](WORKSHOP-part3-IDE.md)** | The control plane: what wxO captures **natively vs what you must derive**. Read a trace to diagnose latency. Session-level **cost and token accounting**. Build **dashboards** for error rate, tail latency and tool-call success. Ship the agent as an **embedded web chat** page. | ~60 min |
-| **[Part 4 — Secure](WORKSHOP-part4-IDE.md)** 🔒 *advanced* | **Authentication, authorization and accounting.** Discover that the REST surface carries **no user identity**, wire it in through the `context_variables` allowlist, enforce roles with an `agent_pre_invoke` plugin, **filter tools by role** so prompt injection cannot reach them, contrast plugins with 2.15.0 **controls**, and confront the fact that **refusals leave no trace**. Optional: run the whole thing against **IBM App ID in a Podman container**. Requires the **`watsonx-orchestrate-aaa`** skill. | ~75 min |
+| **[Part 1 — Build](01-lab-multiagent-orchestration.md)** | Build the team from nothing by prompting Bob: tools, an agent skill, five specialists, an orchestrator. Import, deploy, and **watch the routing fail, then fix it**. Export everything to your laptop and prove you can restore it. | ~60 min |
+| **[Part 2 — Test & evaluate](02-lab-test-evaluate.md)** | Single-turn and multi-turn testing through Bob. A repeatable test suite. Add the in-graph **observer** agent. Run the wxO **evaluations** framework. Have Bob write you an **HTML5 evaluation report**. | ~50 min |
+| **[Part 3 — Embed in a web app](03-lab-webchat-embed.md)** | Retrieve the embed credentials for `dr_house` from the watsonx Orchestrate console, place them in the Next.js app in [`ppth-web/`](ppth-web/), allow `localhost` as an embed origin, and consult Dr House from a web page. | ~20 min |
+| **[Part 4 — Operate](04-extra-lab-control-plane.md)** *extra* | The control plane: what wxO captures **natively vs what you must derive**. Search and read a trace to diagnose latency. Session-level **cost and token accounting**. Build **dashboards** for error rate, tail latency and tool-call success. Inspect the native quality scores. Generate the CLI **embedded web chat** snippet. **Tear everything down.** | ~60 min |
 
-Each part stands on the previous one. Part 1 is mandatory; Parts 2, 3 and 4 can be run on
-consecutive days against the same deployed team.
+Each part stands on the previous one. Part 1 is mandatory and every later part runs against
+the team it deploys. Part 3 only needs the deployed `dr_house`, so it can be done straight
+after Part 1. Part 4 reuses the test suite and observer from Part 2. Parts 2 to 4 can be run
+on consecutive days against the same deployed team.
 
-**Part 4 is the advanced part** and is deliberately uncomfortable: most of what it teaches
-is a *negative* result about how little the platform does for you on identity, and three of
-its findings contradict published documentation. Run it when the room is ready to be told
-that a pattern they have seen in a blog post does not enforce anything on their surface.
+**Part 4 is optional extra material.** It is the most operational part: it is where you
+find out which numbers the platform gives you and which you are on the hook to compute.
+Skip it if time is short, but still run its teardown step (Step 8) when you finish.
+
+> **Security is out of scope.** Part 3 deliberately leaves authentication and authorisation
+> out. There is no lab guide for it, but the
+> [`reference-solution/part4-aaa/`](reference-solution/part4-aaa/) folder holds working
+> artifacts (pre-invoke plugins, a PII control and an App ID demo) if you want to explore it.
 
 ### Pre-flight
 
@@ -174,7 +178,9 @@ a different default, use that and expect different token counts.
   authoring this lab.
 - **Everything here is synthetic.** The patients, charts, formulary and laboratory ranges
   are fictional and must never be used clinically. Every agent is instructed to say so.
-- **Clean up when you finish.** Part 3 ends with a teardown prompt.
+- **Clean up when you finish.** Part 4 ends with a teardown prompt (Step 8). If you skip
+  Part 4, run [`reference-solution/delete-all.sh`](reference-solution/delete-all.sh) or ask
+  Bob to remove what you created.
 
 ### Reference solution
 
@@ -196,9 +202,9 @@ reference-solution/
 │       ├── before-routing-fix/        the failing baseline (5/9 routing)
 │       └── example_trace_with_judge_score.json
 ├── eval/out/          a real `validate-native` run
-├── webchat/index.html the embedded web-chat page (template)
-├── part4-aaa/         Part 4: pre-invoke plugins, the PII control, and
-│   └── app/           a single-container App ID + wxO demo (Containerfile,
+├── webchat/index.html the standalone embedded web-chat page (Part 4 Step 7)
+├── part4-aaa/         optional, no lab guide: pre-invoke plugins, the PII control,
+│   └── app/           and a single-container App ID + wxO demo (Containerfile,
 │                      compose.yml — runs on Podman or Docker)
 ├── import-all.sh · delete-all.sh
 └── README.md
