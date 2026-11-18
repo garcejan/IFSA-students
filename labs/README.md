@@ -2,24 +2,18 @@
 
 ## Building, routing, testing and operating a multi-agent team on IBM watsonx Orchestrate - entirely from IBM Bob IDE
 
-### Audience
-
-**Forward Deployed Engineers, medium to advanced.** You should be comfortable with a
-terminal, YAML, Python and REST. You do not need prior watsonx Orchestrate experience -
-the lab builds everything from zero - but you will move fast.
-
 ### What you actually have
 
 This lab assumes **exactly three things** and nothing else:
 
 1. **Bob** (the agentic IDE) — running on your laptop
-2. The **`watsonx-orchestrate` skill**, installed into Bob from the CE Bob Marketplace or manual
+2. The **`watsonx-orchestrate` skill**, installed into Bob
 3. **A watsonx Orchestrate instance** — your own, or one provisioned from TechZone by Client Engineering
 
-No pre-cloned repo, no scaffolding, no `pip install` you run by hand. Everything below is
-built by **prompting Bob**, and Bob uses the skill to know which `orchestrate` commands are
+
+Many parts below are built by **prompting Bob**, and Bob uses the skill to know which `orchestrate` commands are
 real. That is the point of the lab: the skill is what turns a general-purpose coding agent
-into something that can ship a wxO deployment.
+into something that can ship an agentic deployment.
 
 ### What you build
 
@@ -120,10 +114,12 @@ Which skills do you have available? Show me what the watsonx-orchestrate skill c
 Bob should describe the wxO agent/tool/flow/skill lifecycle. If it cannot, stop and fix the
 skill install — nothing else in this lab will work.
 
-**2. Your wxO instance.** From TechZone (or your own), collect two values:
+**2. Your wxO instance.** From your watsonx Orchestrate instance, collect two values:
 
 - the **API service URL**, the one containing `/instances/<id>` — *not* the console URL
 - an **API key** for that instance
+
+Find these values in **watsonx Orchestrate** -> `your_initials` (top right corner) -> **Settings** -> **API Details**
 
 Put them in your shell, never in a file you commit:
 
