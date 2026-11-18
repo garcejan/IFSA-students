@@ -1,6 +1,6 @@
 # Reference solution — Princeton-Plainsboro diagnostics department
 
-The complete, working project from **Bob-4-Watsonx-Orchestrate**, exactly as it was built
+The complete, working project from **IFSA workshop**, exactly as it was built
 and validated while authoring the lab, including the captured evidence.
 
 **Use it as a checkpoint, not a shortcut.** The learning is in prompting Bob to produce
