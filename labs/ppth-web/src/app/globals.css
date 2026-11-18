@@ -67,8 +67,8 @@ body {
   color: transparent;
 }
 
-/* The placeholder disappears the moment something is mounted into #wxo-chat-root */
-.chat-frame:has(#wxo-chat-root > *) .chat-placeholder {
+/* The placeholder disappears the moment something is mounted into #root */
+.chat-frame:has(#root > *) .chat-placeholder {
   display: none;
 }
 

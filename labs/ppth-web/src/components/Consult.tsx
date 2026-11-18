@@ -20,8 +20,8 @@ const ChatMount = memo(
   function ChatMount() {
     return (
       <div
-        id="wxo-chat-root"
-        className="absolute inset-0"
+        id="root"
+        className="h-full"
         dangerouslySetInnerHTML={{ __html: "" }}
         suppressHydrationWarning
       />
@@ -33,10 +33,10 @@ const ChatMount = memo(
 /**
  * EMBED POINT
  * ----------
- * `#wxo-chat-root` is an empty, full-size container reserved for the chat.
- * Mount your embedded chat into it (e.g. rootElementID: "wxo-chat-root").
+ * `#root` is an empty, full-size container reserved for the chat.
+ * Mount your embedded chat into it (e.g. rootElementID: "root").
  * As soon as it has a child element, the placeholder behind it is hidden by CSS
- * (see `.chat-frame:has(#wxo-chat-root > *)` in globals.css).
+ * (see `.chat-frame:has(#root > *)` in globals.css).
  */
 export default function Consult() {
   const [copied, setCopied] = useState<number | null>(null);
@@ -51,25 +51,34 @@ export default function Consult() {
   // =========================================================================
   // WATSONX ORCHESTRATE EMBED POINT
   // The embedding script belongs here inside a useEffect hook.
-  // This guarantees that #wxo-chat-root is rendered in the DOM before
+  // This guarantees that #root is rendered in the DOM before
   // wxoLoader initializes.
   // =========================================================================
   useEffect(() => {
-    let unmounted = false;
+    // =========================================================================
+    // TODO: PLACE YOUR CREDENTIALS FROM WATSONX ORCHESTRATE HERE
+    // Follow the tutorial in /labs/WORKSHOP-part2-EMBED.md to obtain these values.
+    // =========================================================================
+
+    const orchestrationID = "";  // PLACE HERE: orchestrationID 
+    const hostURL = "";  // PLACE HERE: hostURL
+    const crn = "";  // PLACE HERE: crn
+    const agentId = "";  // PLACE HERE: agentId
+    const agentEnvironmentId = "";  // PLACE HERE: agentEnvironmentId
 
     const initChat = () => {
-      const container = document.getElementById("wxo-chat-root");
-      if (!container || !(window as any).wxoLoader || unmounted) return;
+      const container = document.getElementById("root");
+      if (!container || !(window as any).wxoLoader) return;
 
       const config = {
-        orchestrationID: "d212b1d79d9a4ae0825d28413287c962_256e3d0d-76f6-47c0-90bf-d8fa30e789ed",
-        hostURL: "https://eu-de.watson-orchestrate.cloud.ibm.com",
-        rootElementID: "wxo-chat-root",
+        orchestrationID,
+        hostURL,
+        rootElementID: "root",
         deploymentPlatform: "ibmcloud",
-        crn: "crn:v1:bluemix:public:watsonx-orchestrate:eu-de:a/d212b1d79d9a4ae0825d28413287c962:256e3d0d-76f6-47c0-90bf-d8fa30e789ed::",
+        crn,
         chatOptions: {
-          agentId: "a397236a-b813-48ee-977c-47dd322e6928",
-          agentEnvironmentId: "e111c9d9-e652-4420-9069-b55f000f1951",
+          agentId,
+          agentEnvironmentId,
           onLoad: (instance: any) => {
             chatInstanceRef.current = instance;
           },
@@ -90,7 +99,9 @@ export default function Consult() {
     if (!document.getElementById(scriptId)) {
       const script = document.createElement("script");
       script.id = scriptId;
-      script.src = "https://eu-de.watson-orchestrate.cloud.ibm.com/wxochat/wxoLoader.js?embed=true";
+
+      const cleanHostURL = hostURL.startsWith("/*") ? "https://eu-de.watson-orchestrate.cloud.ibm.com" : hostURL;
+      script.src = `${cleanHostURL}/wxochat/wxoLoader.js?embed=true`;
       script.addEventListener("load", () => {
         initChat();
       });
@@ -100,7 +111,6 @@ export default function Consult() {
     }
 
     return () => {
-      unmounted = true;
       if (chatInstanceRef.current && typeof chatInstanceRef.current.destroy === "function") {
         try {
           chatInstanceRef.current.destroy();
@@ -179,7 +189,7 @@ export default function Consult() {
               <p className="text-xl font-medium">The consultation room is being prepared</p>
               <p className="mt-2 max-w-sm text-sm text-white/45">
                 The embedded chat will appear here. This container is{" "}
-                <code className="rounded bg-white/10 px-1.5 py-0.5 font-mono text-xs text-cyan">#wxo-chat-root</code>.
+                <code className="rounded bg-white/10 px-1.5 py-0.5 font-mono text-xs text-cyan">#root</code>.
               </p>
             </div>
           </div>

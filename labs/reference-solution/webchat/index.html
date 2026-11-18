@@ -1,69 +1,115 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Princeton-Plainsboro — Diagnostics</title>
-<style>
-  :root {
-    color-scheme: light dark;
-    --plane:  #f9f9f7;
-    --surface:#fcfcfb;
-    --ink:    #0b0b0b;
-    --ink-2:  #52514e;
-    --muted:  #898781;
-    --rule:   #e1e0d9;
-    --accent: #2a78d6;
-  }
-  @media (prefers-color-scheme: dark) {
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Princeton-Plainsboro — Diagnostics</title>
+  <style>
     :root {
-      --plane:  #0d0d0d;
-      --surface:#1a1a19;
-      --ink:    #ffffff;
-      --ink-2:  #c3c2b7;
-      --muted:  #898781;
-      --rule:   #2c2c2a;
-      --accent: #3987e5;
+      color-scheme: light dark;
+      --plane: #f9f9f7;
+      --surface: #fcfcfb;
+      --ink: #0b0b0b;
+      --ink-2: #52514e;
+      --muted: #898781;
+      --rule: #e1e0d9;
+      --accent: #2a78d6;
     }
-  }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
-    background: var(--plane);
-    color: var(--ink);
-    min-height: 100vh;
-  }
-  .wrap { max-width: 46rem; margin: 0 auto; padding: 4rem 1.5rem; }
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--rule);
-    border-radius: 14px;
-    padding: 2rem 2.25rem;
-  }
-  .eyebrow {
-    font-size: .75rem; letter-spacing: .1em; text-transform: uppercase;
-    color: var(--muted); margin: 0 0 .5rem;
-  }
-  h1 { font-size: 1.9rem; line-height: 1.2; margin: 0 0 .75rem; }
-  p  { color: var(--ink-2); margin: 0 0 1rem; }
-  ul { color: var(--ink-2); padding-left: 1.2rem; margin: 0 0 1rem; }
-  li { margin: .3rem 0; }
-  code {
-    font: .875em ui-monospace, SFMono-Regular, Menlo, monospace;
-    background: color-mix(in srgb, var(--accent) 10%, transparent);
-    padding: .1em .4em; border-radius: 4px;
-  }
-  .hint {
-    margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--rule);
-    font-size: .9rem; color: var(--muted);
-  }
-  .dot {
-    display: inline-block; width: .5rem; height: .5rem; border-radius: 50%;
-    background: var(--accent); margin-right: .5rem; vertical-align: middle;
-  }
-</style>
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --plane: #0d0d0d;
+        --surface: #1a1a19;
+        --ink: #ffffff;
+        --ink-2: #c3c2b7;
+        --muted: #898781;
+        --rule: #2c2c2a;
+        --accent: #3987e5;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: var(--plane);
+      color: var(--ink);
+      min-height: 100vh;
+    }
+
+    .wrap {
+      max-width: 46rem;
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      border-radius: 14px;
+      padding: 2rem 2.25rem;
+    }
+
+    .eyebrow {
+      font-size: .75rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 .5rem;
+    }
+
+    h1 {
+      font-size: 1.9rem;
+      line-height: 1.2;
+      margin: 0 0 .75rem;
+    }
+
+    p {
+      color: var(--ink-2);
+      margin: 0 0 1rem;
+    }
+
+    ul {
+      color: var(--ink-2);
+      padding-left: 1.2rem;
+      margin: 0 0 1rem;
+    }
+
+    li {
+      margin: .3rem 0;
+    }
+
+    code {
+      font: .875em ui-monospace, SFMono-Regular, Menlo, monospace;
+      background: color-mix(in srgb, var(--accent) 10%, transparent);
+      padding: .1em .4em;
+      border-radius: 4px;
+    }
+
+    .hint {
+      margin-top: 1.5rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--rule);
+      font-size: .9rem;
+      color: var(--muted);
+    }
+
+    .dot {
+      display: inline-block;
+      width: .5rem;
+      height: .5rem;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-right: .5rem;
+      vertical-align: middle;
+    }
+  </style>
 </head>
+
 <body>
 
   <!-- The web-chat launcher mounts into this element. rootElementID must match. -->
@@ -91,7 +137,7 @@
     </div>
   </div>
 
-<!--
+  <!--
   ────────────────────────────────────────────────────────────────────────────
   PASTE YOUR OWN SNIPPET BELOW.
 
@@ -117,29 +163,30 @@
   the whole <script> block with your own output.
   ────────────────────────────────────────────────────────────────────────────
 -->
-<script>
+  <script>
     window.wxOConfiguration = {
-        orchestrationID: "<YOUR_TENANT>_<YOUR_INSTANCE_ID>",
-        hostURL: "https://us-south.watson-orchestrate.cloud.ibm.com",
-        rootElementID: "root",
-        showLauncher: true,
-        crn: "crn:v1:bluemix:public:watsonx-orchestrate:us-south:a/<ACCOUNT>:<INSTANCE_ID>::",
-        deploymentPlatform: "ibmcloud",
-        chatOptions: {
-            agentId: "<DR_HOUSE_AGENT_ID>",
-            agentEnvironmentId: "<AGENT_ENVIRONMENT_ID>"
-        }
+      orchestrationID: "<YOUR_TENANT>_<YOUR_INSTANCE_ID>",
+      hostURL: "https://us-south.watson-orchestrate.cloud.ibm.com",
+      rootElementID: "root",
+      showLauncher: true,
+      crn: "crn:v1:bluemix:public:watsonx-orchestrate:us-south:a/<ACCOUNT>:<INSTANCE_ID>::",
+      deploymentPlatform: "ibmcloud",
+      chatOptions: {
+        agentId: "<DR_HOUSE_AGENT_ID>",
+        agentEnvironmentId: "<AGENT_ENVIRONMENT_ID>"
+      }
     };
 
     setTimeout(function () {
-        const script = document.createElement('script');
-        script.src = `${window.wxOConfiguration.hostURL}/wxochat/wxoLoader.js?embed=true`;
-        script.addEventListener('load', function () {
-            wxoLoader.init();
-        });
-        document.head.appendChild(script);
+      const script = document.createElement('script');
+      script.src = `${window.wxOConfiguration.hostURL}/wxochat/wxoLoader.js?embed=true`;
+      script.addEventListener('load', function () {
+        wxoLoader.init();
+      });
+      document.head.appendChild(script);
     }, 0);
-</script>
+  </script>
 
 </body>
+
 </html>
