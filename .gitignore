@@ -9,3 +9,12 @@
 IFSA Alex AI workshop (1).pptx
 .vscode/settings.json
 .bob/mcp.json
+
+# evaluation output: config.yml embeds a bearer token
+eval/
+agents/
+skills/
+telemetry/
+test/
+tools/
+*-all.sh

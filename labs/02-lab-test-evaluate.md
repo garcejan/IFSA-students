@@ -1,4 +1,4 @@
-# Bob-4-Watsonx-Orchestrate - Part 2
+# IFSA workshop - Part 2
 
 ## Test, observe and evaluate
 
@@ -396,8 +396,6 @@ A repeatable suite with expectations in version control, an in-graph observer pr
 deterministic scores inside the trace, the native evaluation framework run and — more
 importantly — correctly distrusted, and a report you could attach to a status update.
 
-Everything so far has been about **answer quality**. Part 3 is about **running the thing**:
-what the control plane records for you, what it does not, and how to find out why a run took
-twenty seconds.
+Everything so far has been about **answer quality**. Now, before jumping into operational monitoring, let's embed this agent into a beautiful Next.js web interface to see it in action from a user's perspective.
 
-**[Continue to Part 3 — Operate →](WORKSHOP-part3-IDE.md)**
+**[Continue to Part 2-EMBED — Embed in Web App →](WORKSHOP-part2-EMBED.md)**

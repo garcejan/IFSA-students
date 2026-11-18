@@ -1,4 +1,4 @@
-# Bob-4-Watsonx-Orchestrate
+# IFSA workshop
 
 ## Building, routing, testing and operating a multi-agent team on IBM watsonx Orchestrate - entirely from IBM Bob IDE
 
@@ -97,6 +97,7 @@ measure and debug for the rest of the lab.
 |------|--------|------|
 | **[Part 1 — Build](WORKSHOP-part1-IDE.md)** | Build the team from nothing by prompting Bob: tools, an agent skill, six specialists, an orchestrator. Import, deploy, and **fix the routing when it does not work first time**. Export everything to your laptop and prove you can restore it. | ~60 min |
 | **[Part 2 — Test & evaluate](WORKSHOP-part2-IDE.md)** | Single-turn and multi-turn testing through Bob. Add the in-graph **observer** agent. Run the wxO **evaluations** framework. Have Bob write you an **HTML5 evaluation report**. | ~50 min |
+| **[Part 2-EMBED — Embed in Web App](WORKSHOP-part2-EMBED.md)** | Retrieve credentials from watsonx Orchestrate, configure local allowed domains, place them into the Next.js web application, and run the app locally. | ~20 min |
 | **[Part 3 — Operate](WORKSHOP-part3-IDE.md)** | The control plane: what wxO captures **natively vs what you must derive**. Read a trace to diagnose latency. Session-level **cost and token accounting**. Build **dashboards** for error rate, tail latency and tool-call success. Ship the agent as an **embedded web chat** page. | ~60 min |
 | **[Part 4 — Secure](WORKSHOP-part4-IDE.md)** 🔒 *advanced* | **Authentication, authorization and accounting.** Discover that the REST surface carries **no user identity**, wire it in through the `context_variables` allowlist, enforce roles with an `agent_pre_invoke` plugin, **filter tools by role** so prompt injection cannot reach them, contrast plugins with 2.15.0 **controls**, and confront the fact that **refusals leave no trace**. Optional: run the whole thing against **IBM App ID in a Podman container**. Requires the **`watsonx-orchestrate-aaa`** skill. | ~75 min |
 
@@ -133,13 +134,31 @@ export WXO_API_KEY="<your-api-key>"
 export WXO_ENV_NAME="houselab"
 ```
 
-**3. Let Bob set up the CLI.** Do not install anything by hand:
+**3. Set up the CLI.**:
+
+Install the watsonx Orchestrate ADK
+```bash
+# Install watsonx Orchestrate ADK library
+pip install --upgrade ibm-watsonx-orchestrate
+# Verify watsonx Orchestrate has been successully installed
+orchestrate --version
+```
+
+Then create your environment
+
+```bash
+# Create your env
+orchestrate env add -n $WXO_ENV_NAME -u $WXO_INSTANCE_URL
+# Activate your env
+orchestrate env activate $WXO_ENV_NAME --api-key $WXO_API_KEY
+# Check available agents in your env
+orchestrate agents list
+```
+
+Test if Bob can reach the environment too.
 
 ```text
-Set up the watsonx Orchestrate ADK for this project, then register and activate an
-environment named $WXO_ENV_NAME pointing at $WXO_INSTANCE_URL using $WXO_API_KEY.
-Confirm the connection by listing the agents and the available models, and tell me which
-model is the tenant default.
+I've set up the watsonx Orchestrate environment called 'houselab' in terminal, run 'orchestrate agents list' to return list of available agents and also name the default model.
 ```
 
 You are ready when Bob reports a working `orchestrate agents list` and names your default

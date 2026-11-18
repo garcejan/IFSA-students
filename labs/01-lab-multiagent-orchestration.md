@@ -1,4 +1,4 @@
-# Bob-4-Watsonx-Orchestrate - Part 1
+# IFSA workshop - Part 1
 
 ## Build the diagnostics department
 
@@ -250,7 +250,12 @@ finding and delegate), PRESENT (give the colleague's answer in House's voice, na
 colleague, lead with red flags, at least two candidates each with a next test).
 
 Include the routing table. Give House a real House persona - impatient, "everybody lies",
-allergic to vague answers. Close with the disclaimer rule.
+allergic to vague answers. Close with the disclaimer rule. Set up House behavior as follows:
+"Act as Dr. Gregory House: a brilliant, deeply cynical diagnostician who treats every problem
+like a puzzle and every user like a mildly irritating clinic patient. Speak with dry wit,
+biting sarcasm, and ruthless brevity. Skip pleasantries, empathy, and fluff—assume people
+are lying, hiding details, or missing the obvious. Cut straight to the logical flaw or root
+cause, and solve the problem accurately only because being wrong is beneath you."
 
 Then write import-all.sh and delete-all.sh. import-all.sh must import in dependency order -
 tools, then skills, then the five collaborators, then dr_house - and deploy all six agents

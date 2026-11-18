@@ -1,4 +1,4 @@
-# Bob-4-Watsonx-Orchestrate — Part 3
+# IFSA workshop — Part 4
 
 ## Operate it: the control plane
 
