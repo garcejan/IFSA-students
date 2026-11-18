@@ -57,7 +57,6 @@ test/
     example_trace_with_judge_score.json
 eval/out/        a real `orchestrate evaluations validate-native` run
 webchat/         index.html - standalone embedded web-chat page (Part 4 Step 7; placeholders, paste your own snippet)
-part4-aaa/       optional, no lab guide: auth/authz/accounting plugins, PII control, App ID demo
 import-all.sh · delete-all.sh
 ```
 

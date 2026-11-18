@@ -108,11 +108,6 @@ on consecutive days against the same deployed team.
 find out which numbers the platform gives you and which you are on the hook to compute.
 Skip it if time is short, but still run its teardown step (Step 8) when you finish.
 
-> **Security is out of scope.** Part 3 deliberately leaves authentication and authorisation
-> out. There is no lab guide for it, but the
-> [`reference-solution/part4-aaa/`](reference-solution/part4-aaa/) folder holds working
-> artifacts (pre-invoke plugins, a PII control and an App ID demo) if you want to explore it.
-
 ### Pre-flight
 
 **1. Bob + the skill.** Install the `watsonx-orchestrate` skill into Bob from the CE Bob
@@ -203,9 +198,6 @@ reference-solution/
 │       └── example_trace_with_judge_score.json
 ├── eval/out/          a real `validate-native` run
 ├── webchat/index.html the standalone embedded web-chat page (Part 4 Step 7)
-├── part4-aaa/         optional, no lab guide: pre-invoke plugins, the PII control,
-│   └── app/           and a single-container App ID + wxO demo (Containerfile,
-│                      compose.yml — runs on Podman or Docker)
 ├── import-all.sh · delete-all.sh
 └── README.md
 ```
