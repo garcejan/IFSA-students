@@ -8,7 +8,7 @@ This lab assumes **exactly three things** and nothing else:
 
 1. **Bob** (the agentic IDE) — running on your laptop
 2. The **`watsonx-orchestrate` skill**, installed into Bob
-3. **A watsonx Orchestrate instance** — your own, or one provisioned from TechZone by Client Engineering
+3. **A watsonx Orchestrate instance** — your own Trial verion (see [README.md](../README.md#Dependencies))
 
 
 Many parts below are built by **prompting Bob**, and Bob uses the skill to know which `orchestrate` commands are

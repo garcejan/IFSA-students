@@ -298,13 +298,13 @@ me what the actual cause was.
 
 Sanity-check the wiring — `dr_house` must show 2 tools, 5 collaborators, 1 skill:
 
-```text
-Show me the agents list as JSON and confirm dr_house has the right tools, collaborators
-and skills attached. The table output is unreadable in a terminal - parse the JSON.
+```bash
+# Run in terminal OR check watsonx Orchestrate UI
+orchestrate agents list
 ```
 
 > The `orchestrate agents list` table wraps every column to one character per line on a
-> normal terminal. Always have Bob parse `agents list -v` as JSON instead.
+> normal terminal. Use `orchestrate agents list -v` for verbose JSON formatting.
 
 ---
 
@@ -361,7 +361,7 @@ House answered all three himself. The full failing baseline is preserved in
 ### Prompt - diagnose it
 
 ```text
-Three questions did not delegate at all - House answered them himself. Diagnose why.
+Some questions did not delegate at all - House answered them himself - or has been misrouted. Diagnose why.
 Look at my dr_house instructions and the five collaborator descriptions, and tell me which
 specific sentence is suppressing delegation. Do not guess - quote the line and explain the
 mechanism. Then propose the minimal fix.
@@ -427,11 +427,11 @@ turn and tokens. Worth knowing before you attach six skills to one agent.
 
 ---
 
-## Step H - Get it onto your laptop, and prove you can put it back
+## Bonus - Get it onto your laptop, and prove you can put it back
 
 ### Why this step
 
-Your instance is a TechZone environment with an expiry date. Everything you just built is
+Your instance is a Trial environment with an expiry date. Everything you just built is
 one reclaim away from gone. An FDE who cannot reproduce a deployment from a local checkout
 does not have a deployment, they have a demo.
 

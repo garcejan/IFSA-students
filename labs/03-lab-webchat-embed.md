@@ -43,7 +43,7 @@ To embed the agent, you need five specific parameters from your deployed `dr_hou
 
 - **`orchestrationID`**: The unique identifier linking your configuration to the instance.
 - **`hostURL`**: The region-specific gateway (e.g. `https://eu-de.watson-orchestrate.cloud.ibm.com`).
-- **`crn`**: The Cloud Resource Name identifying your service instance resource.
+- **`crn`**: The Cloud Resource Name identifying your service instance resource. If not present, skip it.
 - **`agentId`**: The specific ID of your `dr_house` agent.
 - **`agentEnvironmentId`**: The target runtime environment ID.
 
@@ -60,7 +60,7 @@ The React component managing the consultation section is located at [`labs/ppth-
 ```typescript
     const orchestrationID = "";  // PLACE HERE: orchestrationID 
     const hostURL = "";  // PLACE HERE: hostURL
-    const crn = "";  // PLACE HERE: crn
+    const crn = "";  // (optional) PLACE HERE: crn
     const agentId = "";  // PLACE HERE: agentId
     const agentEnvironmentId = "";  // PLACE HERE: agentEnvironmentId
 
@@ -106,10 +106,10 @@ This is a security feature. To protect your agent, watsonx Orchestrate limits wh
 3. Under the **Security** tab, turn off the toggle switch.
 4. Under the**Allowed origins**, click **Add domain** and input:
    ```text
-   http://localhost:3000
+   http://localhost:3000 # or http://localhost:PORT if you use a different PORT
    ```
 5. Save the configuration.
-6. Refresh your browser at `http://localhost:3000`. 
+6. Refresh your browser at `http://localhost:3000` (or http://localhost:PORT if you use different a PORT). 
 7. Click any of the patient sample cards to copy a test prompt (e.g. *"Patient PPTH-001 had sudden aphasia then a seizure. What is causing it?"*), paste it into the chat box, and watch the multi-agent diagnostic process run!
 
 > **Notes:**
@@ -126,5 +126,15 @@ This is a security feature. To protect your agent, watsonx Orchestrate limits wh
 | **Console shows 401/403 Errors on session start** | Missing allowed domains. | Follow Step 4 to add `http://localhost:3000` to the Web chat's Security domains in wxO console. |
 | **Port 3000 is already in use** | Another dev server is running on port 3000. | Start the server on an alternative port: `npm run dev -- -p 3111` and add `http://localhost:3111` to the allowed domains list. |
 | **Next.js complains about module imports** | Outdated or missing node packages. | Delete the `node_modules` folder, run `npm install` again, and restart the dev server. |
+
+---
+
+## Bonus — Sync the patient cards with your own registry
+
+The patient cards shown on the website are driven by the `PATIENTS` constant in [`labs/ppth-web/src/lib/data.ts`](ppth-web/src/lib/data.ts). That constant was written for the reference solution. If your Part 1 patient registry contains different patients, the website will show the wrong cards.
+
+**Write your own prompt to ask Bob to read your `patient_registry.py` and update `PATIENTS` to match it exactly.**
+
+> **Tip:** if your `patient_registry.py` is in a different folder, tell Bob the exact path before running the prompt.
 
 ---
