@@ -89,13 +89,13 @@ measure and debug for the rest of the lab.
 | Part | You do | Time |
 |------|--------|------|
 | **[Part 1 — Build](01-lab-multiagent-orchestration.md)** | Build the team from nothing by prompting Bob: tools, an agent skill, five specialists, an orchestrator. Import, deploy, and **watch the routing fail, then fix it**. Export everything to your laptop and prove you can restore it. | ~60 min |
-| **[Part 2 — Test & evaluate](02-lab-test-evaluate.md)** | Single-turn and multi-turn testing through Bob. A repeatable test suite. Add the in-graph **observer** agent. Run the wxO **evaluations** framework. Have Bob write you an **HTML5 evaluation report**. | ~50 min |
-| **[Part 3 — Embed in a web app](03-lab-webchat-embed.md)** | Retrieve the embed credentials for `dr_house` from the watsonx Orchestrate console, place them in the Next.js app in [`ppth-web/`](ppth-web/), allow `localhost` as an embed origin, and consult Dr House from a web page. | ~20 min |
+| **[Part 2 — Embed in a web app](02-lab-webchat-embed.md)** | Retrieve the embed credentials for `dr_house` from the watsonx Orchestrate console, place them in the Next.js app in [`ppth-web/`](ppth-web/), allow `localhost` as an embed origin, and consult Dr House from a web page. | ~20 min |
+| **[Part 3 — Test & evaluate](03-lab-test-evaluate.md)** | Single-turn and multi-turn testing through Bob. A repeatable test suite. Add the in-graph **observer** agent. Run the wxO **evaluations** framework. Have Bob write you an **HTML5 evaluation report**. | ~50 min |
 | **[Part 4 — Operate](04-extra-lab-control-plane.md)** *extra* | The control plane: what wxO captures **natively vs what you must derive**. Search and read a trace to diagnose latency. Session-level **cost and token accounting**. Build **dashboards** for error rate, tail latency and tool-call success. Inspect the native quality scores. Generate the CLI **embedded web chat** snippet. **Tear everything down.** | ~60 min |
 
 Each part stands on the previous one. Part 1 is mandatory and every later part runs against
-the team it deploys. Part 3 only needs the deployed `dr_house`, so it can be done straight
-after Part 1. Part 4 reuses the test suite and observer from Part 2. Parts 2 to 4 can be run
+the team it deploys. Part 2 only needs the deployed `dr_house`, so it can be done straight
+after Part 1. Part 4 reuses the test suite and observer from Part 3. Parts 2 to 4 can be run
 on consecutive days against the same deployed team.
 
 **Part 4 is optional extra material.** It is the most operational part: it is where you

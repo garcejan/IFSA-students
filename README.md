@@ -17,7 +17,7 @@ Over four parts you build a team of AI agents, deploy it to watsonx Orchestrate,
 | [Python](https://www.python.org/) | 3.12 or later (pinned in [`.python-version`](.python-version)) | Tools, telemetry scripts and the `orchestrate` CLI |
 | [uv](https://docs.astral.sh/uv/) | any recent version | Creating the virtual environment and installing packages |
 | [`ibm-watsonx-orchestrate`](https://pypi.org/project/ibm-watsonx-orchestrate/) | 2.20.0 or later (locked to 2.20.0 in [`uv.lock`](uv.lock)) | watsonx Orchestrate ADK and the `orchestrate` CLI |
-| [Node.js](https://nodejs.org/) and npm | Node.js 20 or later | Next.js web app in [`labs/ppth-web/`](labs/ppth-web/) (Part 3) |
+| [Node.js](https://nodejs.org/) and npm | Node.js 20 or later | Next.js web app in [`labs/ppth-web/`](labs/ppth-web/) (Part 2) |
 
 Python dependencies are declared in [`pyproject.toml`](pyproject.toml). The web app's dependencies are in [`labs/ppth-web/package.json`](labs/ppth-web/package.json).
 
@@ -31,7 +31,7 @@ Python dependencies are declared in [`pyproject.toml`](pyproject.toml). The web 
    source .venv/bin/activate
    ```
 
-3. Install the web app dependencies (only needed for Part 3):
+3. Install the web app dependencies (only needed for Part 2):
 
    ```bash
    cd labs/ppth-web
@@ -51,8 +51,8 @@ IFSA-students/
 └── labs/
     ├── README.md            # Lab overview, architecture, pre-flight
     ├── 01-lab-multiagent-orchestration.md
-    ├── 02-lab-test-evaluate.md
-    ├── 03-lab-webchat-embed.md
+    ├── 02-lab-webchat-embed.md
+    ├── 03-lab-test-evaluate.md
     ├── 04-extra-lab-control-plane.md
     ├── ppth-web/            # Next.js app for the web chat embed
     └── reference-solution/  # Complete, working project to compare against
