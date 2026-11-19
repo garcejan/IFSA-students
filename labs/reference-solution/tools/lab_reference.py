@@ -3,7 +3,7 @@
 LAB DEVICE (deliberate, do not "fix"):
     This tool sleeps for LIS_LATENCY_SECONDS before returning. It simulates a slow
     Laboratory Information System lookup and is the *planted* latency in this workshop.
-    In Part 3 you find this stall in a wxO observability trace without knowing in
+    In Part 4 you find this stall in a wxO observability trace without knowing in
     advance that it is here. Everything else in the team responds in well under a second.
 """
 

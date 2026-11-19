@@ -423,7 +423,7 @@ turn and tokens. Worth knowing before you attach six skills to one agent.
 > **On the one that "failed":** a whole-chart question about PPTH-003 — a febrile transplant
 > recipient — can legitimately be answered by House *or* routed to Cameron. Both are correct.
 > Genuinely ambiguous questions need an **accepted set**, not one expected value, or your
-> regression suite will flap forever. Part 2 encodes that properly.
+> regression suite will flap forever. Part 3 encodes that properly.
 
 ---
 
@@ -473,4 +473,4 @@ You have also seen the two things that make wxO multi-agent work land or fail:
 **routing is driven by descriptions**, and **an orchestrator that is allowed to answer will
 answer**.
 
-**[Continue to Part 2 — Test & evaluate →](02-lab-test-evaluate.md)**
+**[Continue to Part 2 — Embed in a web app →](02-lab-webchat-embed.md)**

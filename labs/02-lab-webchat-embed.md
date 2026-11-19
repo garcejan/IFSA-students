@@ -1,4 +1,4 @@
-# IFSA workshop — Part 3 webchat embedding
+# IFSA workshop — Part 2 webchat embedding
 
 ## Embed Dr House into the Princeton-Plainsboro Next.js Web App
 
@@ -138,3 +138,9 @@ The patient cards shown on the website are driven by the `PATIENTS` constant in 
 > **Tip:** if your `patient_registry.py` is in a different folder, tell Bob the exact path before running the prompt.
 
 ---
+
+## Where you are
+
+Dr House is now answering consultations from a web page. Next, test and evaluate the team to find out whether it is actually giving good answers.
+
+**[Continue to Part 3 — Test & evaluate →](03-lab-test-evaluate.md)**

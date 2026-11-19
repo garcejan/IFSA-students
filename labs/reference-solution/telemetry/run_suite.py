@@ -6,7 +6,7 @@ For each question this records:
   - which tools were called and which collaborator was delegated to
   - the AgentOps v3 trace (per-observation latency, token usage, model, judge scores)
 
-Everything lands in test/results/raw/ as JSON so Part 3 can compute metrics offline
+Everything lands in test/results/raw/ as JSON so Part 4 can compute metrics offline
 without re-running the agents.
 
 Usage:

@@ -4,7 +4,7 @@ LAB DEVICE (deliberate, do not "fix"):
     This tool raises ValueError for any drug that is not in the small synthetic
     formulary below. That is the *planted* failure mode of this workshop: it produces
     genuine failed tool calls, which is what the tool-call success rate and error-rate
-    panels in Part 3 are measuring. A team that never fails produces a boring dashboard.
+    panels in Part 4 are measuring. A team that never fails produces a boring dashboard.
 """
 
 from typing import List

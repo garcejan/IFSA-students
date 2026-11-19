@@ -2,7 +2,7 @@
 
 ## Operate it: the control plane
 
-**~60 minutes.** Parts 1 and 2 were about whether the team gives good answers. This part is
+**~60 minutes.** Parts 1 and 3 were about whether the team gives good answers. This part is
 about running it in production: what watsonx Orchestrate records **for** you, what it
 records **nothing** about, how to find out why a run took twenty seconds, what a
 conversation costs, and how to ship the thing to a web page.
@@ -407,7 +407,7 @@ agents, and it will bite any customer who wires that number to an alert.
 Given that the hallucination judge scored a correct, tool-grounded answer as 0.85, how would
 you design a hallucination check for THIS agent that does not produce that false positive?
 Consider what evidence a judge would need in scope. Compare that to what our in-graph
-case_reviewer from Part 2 does differently, and say which of the two you would put in front
+case_reviewer from Part 3 does differently, and say which of the two you would put in front
 of a customer.
 ```
 

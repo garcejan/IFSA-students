@@ -67,7 +67,7 @@ Both are load-bearing for Part 4. **Do not fix them.**
 | Where | What | Found in |
 |-------|------|----------|
 | `tools/lab_reference.py` | `time.sleep(4.5)` — a slow Laboratory Information System | Part 4 Step 3, from the trace |
-| `tools/drug_interaction.py` | raises for any drug outside the formulary | Part 2 Step D, Part 4 Step 5 |
+| `tools/drug_interaction.py` | raises for any drug outside the formulary | Part 3 Step D, Part 4 Step 5 |
 
 ## Measured results from the authoring run
 

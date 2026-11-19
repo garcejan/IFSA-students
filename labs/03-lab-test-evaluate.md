@@ -1,4 +1,4 @@
-# IFSA workshop - Part 2
+# IFSA workshop - Part 3
 
 ## Test, observe and evaluate
 
@@ -396,6 +396,6 @@ A repeatable suite with expectations in version control, an in-graph observer pr
 deterministic scores inside the trace, the native evaluation framework run and — more
 importantly — correctly distrusted, and a report you could attach to a status update.
 
-Everything so far has been about **answer quality**. Now, before jumping into operational monitoring, let's embed this agent into a beautiful Next.js web interface to see it in action from a user's perspective.
+Everything so far has been about **answer quality**. The optional extra part moves on to operational monitoring: what the platform records for you and what you must derive.
 
-**[Continue to Part 3 — Embed in a web app →](03-lab-webchat-embed.md)**
+**[Continue to Part 4 — Operate (extra) →](04-extra-lab-control-plane.md)**
