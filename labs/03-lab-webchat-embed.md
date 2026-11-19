@@ -24,10 +24,10 @@ To embed the agent, you need five specific parameters from your deployed `dr_hou
 <script>
   window.wxOConfiguration = {
     orchestrationID: "*****",
-    hostURL: "https://eu-de.watson-orchestrate.cloud.ibm.com",
+    hostURL: "*****",
     rootElementID: "root",
     deploymentPlatform: "ibmcloud",
-    crn: "crn:v1:bluemix:public:watsonx-orchestrate:eu-de:a/*****",
+    crn: "crn:v1:bluemix:public:watsonx-orchestrate:*****",
     chatOptions: {
       agentId: "*****",
       agentEnvironmentId: "*****",

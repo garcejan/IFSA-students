@@ -1,112 +1,80 @@
-# IFSA x IBM workshop: watsonx.ai student tutorials
+# IFSA x IBM workshop: multi-agent teams on watsonx Orchestrate
 
-This repository contains hands-on tutorials for learning AI/ML development with IBM watsonx.ai platform. Each tutorial guides you through building practical AI systems from data preparation to deployment.
+Hands-on workshop for building, routing, testing and operating a multi-agent system on **IBM watsonx Orchestrate (wxO)**, driven from the **IBM Bob** IDE.
 
 ![`Instructors`](/img/instructors.png)
 
+Over four parts you build a team of AI agents, deploy it to watsonx Orchestrate, test and evaluate it, embed it in a web app, and operate it with traces and dashboards.
 
-## 📚 Tutorials
+**Start here: [`labs/README.md`](labs/README.md).** It has the architecture, the four lab parts, pre-flight setup, ground rules and the reference solution.
 
-### 1. AutoAI: Train and Deploy ML Models
-**Location:** [`AutoAI/`](AutoAI/)
+## Dependencies
 
-Learn to build and deploy machine learning models using IBM watsonx.ai's automated machine learning capabilities.
+| Dependency | Version | Used for |
+|------------|---------|----------|
+| [IBM Bob](https://bob.ibm.com) | Trial: 50 bobcoins for 30 days | The agentic IDE that you drive the labs from |
+| [IBM watsonx Orchestrate](https://www.ibm.com/products/watsonx-orchestrate) | Trial: 30 days | The platform that hosts the agents. Your own instance, or one provisioned for you |
+| [Python](https://www.python.org/) | 3.12 or later (pinned in [`.python-version`](.python-version)) | Tools, telemetry scripts and the `orchestrate` CLI |
+| [uv](https://docs.astral.sh/uv/) | any recent version | Creating the virtual environment and installing packages |
+| [`ibm-watsonx-orchestrate`](https://pypi.org/project/ibm-watsonx-orchestrate/) | 2.20.0 or later (locked to 2.20.0 in [`uv.lock`](uv.lock)) | watsonx Orchestrate ADK and the `orchestrate` CLI |
+| [Node.js](https://nodejs.org/) and npm | Node.js 20 or later | Next.js web app in [`labs/ppth-web/`](labs/ppth-web/) (Part 3) |
 
-**What You'll Learn:**
-- Train models using AutoAI (automated machine learning)
-- Deploy models to production via deployment spaces
-- Call deployed models via API from Jupyter notebooks
-- Evaluate and compare model performance
+Python dependencies are declared in [`pyproject.toml`](pyproject.toml). The web app's dependencies are in [`labs/ppth-web/package.json`](labs/ppth-web/package.json).
 
-**Key Technologies:**
-- IBM watsonx.ai AutoAI
-- watsonx Machine Learning
-- Jupyter Notebooks
+## Getting started
 
-**Use Case:** Housing price prediction using regression models
+1. Clone this repository.
+2. Install the Python dependencies:
 
----
+   ```bash
+   uv sync
+   source .venv/bin/activate
+   ```
 
-### 2. MultimodalRAG: AI-Powered Document Q&A
-**Location:** [`MultimodalRAG/`](MultimodalRAG/)
+3. Install the web app dependencies (only needed for Part 3):
 
-Build a Retrieval-Augmented Generation (RAG) system that answers questions from PDF documents containing text, tables, and images.
+   ```bash
+   cd labs/ppth-web
+   npm install
+   ```
 
-**What You'll Learn:**
-- Parse PDFs and extract multimodal content using Docling
-- Use IBM Granite vision models for image understanding
-- Build vector databases for semantic search
-- Create end-to-end RAG pipelines with LangChain
+4. Follow the pre-flight steps in [`labs/README.md`](labs/README.md) to install the Bob skill and connect to your watsonx Orchestrate instance.
 
-**Key Technologies:**
-- IBM Granite AI models (language + vision)
-- Docling document processing
-- LangChain framework
-- ChromaDB vector database
-
-**Use Case:** Intelligent document question-answering system
-
----
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-1. **IBM Cloud Account** with access to watsonx.ai
-2. **IBM Cloud API Key** (for AutoAI tutorial)
-3. **Replicate Account** with API token (for MultimodalRAG tutorial)
-
-### Quick Start
-
-1. Clone this repository
-2. Navigate to the tutorial folder of your choice
-3. Follow the detailed README.md in each tutorial directory
-4. Open the provided Jupyter notebooks in watsonx.ai Studio
-
-## 📁 Repository Structure
+## Repository structure
 
 ```
 IFSA-students/
-├── README.md                    # This file
-├── AutoAI/                      # AutoAI tutorial
-│   ├── README.md               # Detailed AutoAI guide
-│   ├── data/                   # Training datasets
-│   ├── img/                    # Tutorial screenshots
-│   └── src/                    # Jupyter notebooks
-└── MultimodalRAG/              # Multimodal RAG tutorial
-    ├── README.md               # Detailed RAG guide
-    ├── data/                   # Sample PDF documents
-    └── src/                    # Jupyter notebooks
+├── README.md
+├── pyproject.toml           # Python project (ibm-watsonx-orchestrate)
+├── workspace_config.yaml    # wxO ADK folder paths
+├── img/                     # Images used in the docs
+└── labs/
+    ├── README.md            # Lab overview, architecture, pre-flight
+    ├── 01-lab-multiagent-orchestration.md
+    ├── 02-lab-test-evaluate.md
+    ├── 03-lab-webchat-embed.md
+    ├── 04-extra-lab-control-plane.md
+    ├── ppth-web/            # Next.js app for the web chat embed
+    └── reference-solution/  # Complete, working project to compare against
 ```
 
-## 🎯 Learning Path
+You create the working project (agents, tools, skills and scripts) in the repository root as you go through the labs. Those folders are git-ignored.
 
-**Recommended Order:**
+## Additional resources
 
-1. **Start with AutoAI** - Learn the fundamentals of model training and deployment
-2. **Progress to MultimodalRAG** - Build advanced AI systems with multiple modalities
+- [IBM Bob](https://bob.ibm.com): trial access and downloads
+- [IBM watsonx Orchestrate](https://www.ibm.com/products/watsonx-orchestrate): product page and 30-day trial
+- [IBM watsonx Orchestrate documentation](https://www.ibm.com/docs/en/watsonx/watson-orchestrate)
+- [watsonx Orchestrate ADK](https://developer.watson-orchestrate.ibm.com/)
+- [uv documentation](https://docs.astral.sh/uv/)
+- [Next.js documentation](https://nextjs.org/docs)
 
-Both tutorials are self-contained and can be completed independently.
+## Support
 
-## 📖 Additional Resources
-
-- [IBM watsonx.ai Documentation](https://www.ibm.com/docs/en/watsonx-as-a-service)
-- [IBM Granite Models](https://www.ibm.com/granite/docs/models/granite/)
-- [LangChain Documentation](https://python.langchain.com/)
-- [Docling Documentation](https://docling-project.github.io/docling/)
-
-## 🆘 Support
-
-For questions or issues:
-1. Check the tutorial-specific README.md files
-2. Review the troubleshooting sections in each tutorial
-3. Consult the IBM watsonx.ai documentation
-4. Contact your instructor or teaching assistant
-
----
-
-**Happy Learning!** 🎓
-
+1. Re-read the relevant lab and its pre-flight and ground rules.
+2. Compare your work with the [reference solution](labs/reference-solution/).
+3. Ask Bob to diagnose the error output.
+4. Contact your instructor or teaching assistant.
 
 ---
 
