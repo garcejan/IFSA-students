@@ -1,13 +1,13 @@
 # Build the Princeton-Plainsboro landing page with Bob
 
-A step-by-step tutorial. You will prompt **IBM Bob** to build a futuristic, scroll-driven hospital web page for the diagnostics department you built in the watsonx Orchestrate lab (Dr House and his team), run it locally, understand how it works, and leave a ready-made spot for the embedded chat.
+A step-by-step tutorial. You will prompt **IBM Bob** to build a futuristic, scroll-driven hospital web page for the diagnostics department you built in the watsonx Orchestrate lab (Dr House and his team), run it locally, understand how it works, and connect the embedded chat.
 
-Deploying to Vercel is **optional** (Step 8).
+Deploying to Vercel is **optional** (Step 7).
 
 | | |
 |---|---|
 | **Time** | About 30 minutes (plus 10 for the optional deploy) |
-| **Result** | A Next.js page with scrollytelling, a routing animation, patient charts and a reserved chat container |
+| **Result** | A Next.js page with scrollytelling, a routing animation, patient charts and an embedded chat container |
 | **Stack** | [Next.js](https://nextjs.org) (App Router) · [Tailwind CSS](https://tailwindcss.com) v4 · [Motion](https://motion.dev) (`motion/react`) · IBM Plex fonts |
 
 ## What the department looks like
@@ -33,7 +33,7 @@ The medicine is synthetic and deliberately shallow; the orchestration is real. A
 - The lab material (agents, tools and patient charts) in your workspace. Bob reads it to fill the page with real content, such as agent descriptions, patient IDs and tool names.
 - Internet access during the first build, because the IBM Plex fonts are fetched from Google Fonts
 
-You do **not** need a watsonx Orchestrate instance for this tutorial. The chat is embedded later.
+You do **not** need a watsonx Orchestrate instance to build and run the page. You only need one to connect the live chat (Step 6, which is covered in detail in [Part 2](../02-lab-webchat-embed.md)).
 
 ---
 
@@ -85,6 +85,7 @@ Each section uses a different scroll technique. Read the component named in the 
 
 | # | Section | What you see | Technique | File |
 |---|---|---|---|---|
+| 0 | Nav | Floating menu with a scroll progress bar | Page scroll progress smoothed with `useSpring` | `src/components/Nav.tsx` |
 | 1 | Hero | Headline, live counters, ECG | Staggered text reveal, parallax with `useScroll` / `useTransform`, count-up with `animate` | `src/components/Hero.tsx` |
 | 2 | Mission | Words fade in as you scroll | Per-word opacity tied to scroll progress | `src/components/Manifesto.tsx` |
 | 3 | Dispatch | Four steps while the screen stays pinned | `position: sticky` in a tall section, step chosen from scroll progress | `src/components/Dispatch.tsx` |
@@ -92,7 +93,7 @@ Each section uses a different scroll technique. Read the component named in the 
 | 5 | Routing lab | Click a case, watch it route | State machine (phases 1–4) driving the SVG graph | `src/components/RouterLab.tsx` |
 | 6 | Charts | Four patient cards | 3D tilt from mouse position with `useSpring` | `src/components/Charts.tsx` |
 | 7 | Toolbelt | Six tools, two skills | `whileInView` with staggered children | `src/components/Toolbelt.tsx` |
-| 8 | Consult | Chat panel and starter prompts | The embed point (Step 7) | `src/components/Consult.tsx` |
+| 8 | Consult | Chat panel and starter prompts | The embed point (Step 6) | `src/components/Consult.tsx` |
 
 Shared pieces:
 
@@ -125,7 +126,7 @@ horizontal scroll at 390 px width.
 
 > **Tip:** Ask Bob to run `npm run lint` and `npm run build` after each change. A change is finished when both pass.
 
-## Step 6: Validate
+## Step 5: Validate
 
 Before you move on, run the same checks Bob ran:
 
@@ -137,35 +138,15 @@ npm start          # serves the production build on http://localhost:3000
 
 Production mode (`npm start`) is also the smoothest way to judge the scroll animations.
 
-## Step 7: Connect the chat (when it is ready)
+## Step 6: Connect the chat
 
-The Consult section contains this container, deliberately empty:
+The Consult section already contains the chat container and the loader code in `src/components/Consult.tsx`. Follow [Part 2: Embed in a web app](../02-lab-webchat-embed.md) to get your credentials, enter them and allow your domain.
 
-```html
-<div id="wxo-chat-root" class="absolute inset-0"></div>
-```
+If you deploy (Step 7), repeat the allowed-domain step in Part 2 for your public URL.
 
-How it works:
+## Step 7 (Bonus): Deploy to Vercel
 
-- A placeholder ("Awaiting channel") sits behind it
-- The moment your embed script adds an element **inside** `#wxo-chat-root`, a CSS rule hides the placeholder (`.chat-frame:has(#wxo-chat-root > *)` in `src/app/globals.css`)
-- React renders the container with no children, so it never fights a third-party script
-
-To connect it, generate the embed snippet for `dr_house` from your watsonx Orchestrate instance (the lab's part 3 shows how), set the snippet's `rootElementID` to `wxo-chat-root`, and load the script from the Consult component.
-
-> **Note:** an embedded chat that works on a fully public page needs the web chat security settings for your agent and origin to be configured in the watsonx Orchestrate UI. Allow both `http://localhost:3000` for testing and, if you deploy, your public domain.
-
-A prompt you can give Bob when you are ready:
-
-```text
-Mount the watsonx Orchestrate embedded chat into the #wxo-chat-root container
-in the Consult section. Use this snippet: <paste your snippet>. Read the
-config values from environment variables, not from the source code.
-```
-
-## Step 8 (Bonus): Deploy to Vercel
-
-Skip this step if you only need the page locally. The app is fully static and needs **no environment variables**.
+Skip this step if you only need the page locally. Without the chat values the app is fully static and needs **no environment variables**.
 
 ### Option A: let Bob do it
 
@@ -196,7 +177,7 @@ vercel deploy --prod --yes
 - `vercel link` creates `.vercel/` and `.env.local` in this folder. Both are git-ignored; never commit them.
 - Vercel detects Next.js automatically, so no build settings are needed
 
-After you add the chat embed (Step 7), redeploy, and allow your Vercel domain in your watsonx Orchestrate tenant if it restricts origins.
+After you add the chat embed (Step 6), redeploy.
 
 ---
 
@@ -209,7 +190,6 @@ After you add the chat embed (Step 7), redeploy, and allow your Vercel domain in
 | Port 3000 is already in use | `npm run dev -- -p 3111` |
 | Animations feel slow in dev mode | Use `npm run build && npm start` |
 | Animations do not play | Your operating system has "reduce motion" enabled. This is intended. |
-| Bob starts writing watsonx Orchestrate embed code you do not want | Send: "Do not embed watsonx Orchestrate. I will embed it myself later." |
 | Counters in the hero show `0` in a screenshot | They count up after about 1.2 s. Wait, or take the screenshot later. |
 | `vercel`: `No existing credentials found` | Run `vercel login`, or pass `--token <token>` (Vercel → Account Settings → Tokens) |
 | `vercel login` never completes | The device code expires after a few minutes. Start `vercel login` again and approve the new code. |
@@ -224,7 +204,7 @@ labs/ppth-web/
 │   │   ├── layout.tsx          # fonts (IBM Plex), metadata, MotionProvider
 │   │   ├── page.tsx            # assembles the sections in order
 │   │   └── globals.css         # Tailwind theme, graph-paper backgrounds, chat placeholder rule
-│   ├── components/             # one file per section + RoutingGraph + MotionProvider
+│   ├── components/             # Nav, one file per section, RoutingGraph, MotionProvider
 │   └── lib/data.ts             # all content: agents, patients, sample cases, tools, skills
 ├── next.config.ts
 └── package.json
