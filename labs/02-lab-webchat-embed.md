@@ -104,7 +104,7 @@ This is a security feature. To protect your agent, watsonx Orchestrate limits wh
 1. Return to the watsonx Orchestrate console.
 2. Go back to your Settings **`your initials`** -> **Settings** -> **Embed Security**.
 3. Under the **Security** tab, turn off the toggle switch.
-4. Under the**Allowed origins**, click **Add domain** and input:
+4. Under the **Allowed origins**, click **Add domain** and input:
    ```text
    http://localhost:3000 # or http://localhost:PORT if you use a different PORT
    ```

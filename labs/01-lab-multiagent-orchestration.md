@@ -267,13 +267,54 @@ import directly from now on; always run the script.
 
 ## Step F - Import and deploy
 
-### Prompt
+Choose one option. Both end in the same state and produce the same output.
+
+### Option A - Let Bob do it
 
 ```text
 Confirm which environment is active, then run import-all.sh. Show me any errors and the
 final agents list. If anything fails, fix the cause rather than working around it, and tell
 me what the actual cause was.
 ```
+
+### Option B - Import and deploy manually
+
+Run the commands yourself from the folder that contains `tools/`, `skills/` and `agents/`
+(your project, or `reference-solution/`). The order matters: tools, then skills, then the
+collaborators, then the orchestrator, then deploy.
+
+```bash
+# 0. Confirm the active environment
+orchestrate env list
+
+# 1. Tools
+for f in tools/*.py; do
+  orchestrate tools import -k python -f "$f"
+done
+
+# 2. Agent skills (--upsert overwrites an existing skill of the same name)
+orchestrate skills import -f skills/diagnostics_protocol/SKILL.md --upsert
+orchestrate skills import -f skills/case_review_rubric/SKILL.md --upsert
+
+# 3. Collaborators - before the orchestrator that references them
+for a in dr_wilson dr_foreman dr_chase dr_cameron dr_cuddy case_reviewer; do
+  orchestrate agents import -f "agents/${a}.yaml"
+done
+
+# 4. Orchestrator
+orchestrate agents import -f agents/dr_house.yaml
+
+# 5. Deploy all seven agents
+for a in dr_wilson dr_foreman dr_chase dr_cameron dr_cuddy case_reviewer dr_house; do
+  orchestrate agents deploy -n "$a"
+done
+```
+
+- `import` is upsert-by-name: it overwrites an existing resource with the same name.
+- If a step fails, fix the cause and re-run that step. Do not skip ahead. Importing
+  `dr_house` before its collaborators and skill exist fails.
+- Every Python tool prints the warning described in Step B. Ignore it.
+- To remove everything again, run `delete-all.sh` (Step E).
 
 ### Expected output
 
